@@ -1,0 +1,292 @@
+<resources>
+    <string name="app_name">AgroNodo</string>
+    <string name="title_activity_menu__agronomo">Menu Agronomo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="bienvenido">Welcome</string>
+    <string name="usuario">User</string>
+    <string name="nombre">Name</string>
+    <string name="titulo">Title</string>
+    <string name="username">Username</string>
+    <string name="numerotelefono">Phone number</string>
+    <string name="correo">Email</string>
+    <string name="contrasena">Password</string>
+    <string name="iniciar_sesion">Sign in</string>
+    <string name="olvido_contrasena">Forgot password?</string>
+    <string name="cerrar_sesion">Log-out</string>
+    <string name="desea_cerrar_sesion">Do you want to log out?</string>
+    <string name="perdera_datos_no_subidos">You will lose data that you have not uploaded to the internet</string>
+
+    <string name="inicio">Home</string>
+    <string name="mis_predios">My Fields</string>
+    <string name="mi_mapa">My Map</string>
+    <string name="mi_usuario">My User</string>
+    <string name="notificaciones">Notifications</string>
+    <string name="acerca_agronodo">About Agronodo</string>
+    <string name="sitio_web">WEB Page</string>
+
+    <string name="recuperar_contrasena">Password Recovery</string>
+    <string name="enviar_correo">Send Email</string>
+
+    <string name="verificando_correo">Checking Mail</string>
+    <string name="correo_enviado">Recovery Mail Sent Successfully</string>
+    <string name="correo_no_existe">The selected Mail does not exist</string>
+
+    <string name="enterado">OK</string>
+    <string name="confirmar">Confirm</string>
+
+    <string name="datos_incompletos">Incomplete data</string>
+    <string name="complete_datos_correctamente">Complete the data correctly</string>
+
+    <string name="iniciando_sesion">Logging in</string>
+    <string name="sesion_iniciada">Session Started</string>
+
+    <string name="cuenta_no_soportada">Type of account not supported</string>
+    <string name="cuenta_de_tipo">Your type account (</string>
+    <string name="no_es_soportada">) is not supported in the application</string>
+
+    <string name="error_datos">Data Error</string>
+    <string name="cuenta_no_encontrada">Your account was not found</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="datos_predio">Field Data</string>
+
+    <string name="seleccionar_fecha">Select Date</string>
+    <string name="fecha_inicio">Initial date:</string>
+    <string name="fecha_final">End Date:</string>
+
+    <string name="no_hay_predios_disponibles">No Fields Available</string>
+    <string name="no_hay_notificaciones_disponibles">No Notifications Available</string>
+    <string name="no_hay_recorridos_disponibles">No Pathing Available</string>
+
+    <string name="agregar_predio">Add Field</string>
+    <string name="editar_predio">Edit Field</string>
+    <string name="agregar_subpredio">Add Sub-Field</string>
+    <string name="campo_seleccionado_no_valido">The selected field is not valid</string>
+    <string name="empezar">Start</string>
+    <string name="atencion">Attention</string>
+    <string name="aceptar">Yes</string>
+    <string name="cancelar">Cancel</string>
+    <string name="subpredio_tomara_todo_espacio">The Sub-Field will take all the size</string>
+    <string name="no_hay_tareas">You have not designated jobs</string>
+    <string name="Simples">Simple</string>
+    <string name="Recorrido_de_Tareas">Jobs path</string>
+    <string name="Seleccione_tipo_tareas">Select the type of tasks to use:</string>
+    <string name="Agregar_objetivo">Assign the objetive:</string>
+    <string name="descripciones_tareas_unicas">¿Do you wich add unique objetives to jobs?</string>
+
+    <string name="predio_registrado">Field successfully registered</string>
+    <string name="no_se_pudo_registrar_predio">Could not add this Field</string>
+
+
+    <string name="cultivo_registrado">Crop successfully registered</string>
+    <string name="no_se_pudo_registrar_cultivo">Could not add this crop</string>
+
+    <string name="subpredio_registrado">Sub-Field successfully registered</string>
+    <string name="no_se_pudo_registrar_subpredio">Could not add this Sub-Field</string>
+
+    <string name="predio_editado">Successfully edited field</string>
+    <string name="no_se_pudo_editar_predio">Cannot edit this Field</string>
+
+    <string name="predio_borrado">Successfully deleted field</string>
+    <string name="no_se_pudo_borrar_predio">Cannot delete this Field</string>
+
+    <string name="subpredio_editado">Successfully edited Sub-Field</string>
+    <string name="no_se_pudo_editar_subpredio">Cannot edit this Sub-Field</string>
+
+    <string name="eliminar">Remove</string>
+    <string name="editar">Edit</string>
+
+    <string name="deseas_editar_predio">Do you want to edit this Field?</string>
+    <string name="deseas_eliminar_predio">Do you want to delete this Field?</string>
+
+    <string name="deseas_editar_subpredio">Do you want to edit this Sub-Field?</string>
+    <string name="deseas_eliminar_subpredio">Do you want to delete this Sub-Field?</string>
+
+    <string name="internet_no_disponible">Internet not available</string>
+    <string name="conectese_internet">Connect to a network to continue</string>
+
+    <string name="seleccionar_cultivo">Select crop</string>
+    <string name="seleccionar_agricultura">Agriculture type</string>
+
+    <string name="nombre_cultivo_nuevo">Name of the New Crop</string>
+    <string name="tradicional">Traditional</string>
+    <string name="protegida">Protected</string>
+
+    <string name="tareas">Tasks</string>
+    <string name="no_hay_tareas_pendientes">No Pending Tasks</string>
+    <string name="no_hay_tareas_realizadas">No Tasks Done</string>
+
+    <string name="agregar_tareas">Add Task</string>
+
+    <string name="pendientes">Pendings</string>
+    <string name="realizadas">Done</string>
+
+    <string name="marcador_no_dentro_de_sublotes">The Marker cannot be inside other Sub-Fields</string>
+    <string name="marcador_estar_dentro_predio">The Marker must be within the Field</string>
+
+    <string name="recorrido_tareas">Do you want to start a jobs pathing?</string>
+
+    <string name="crear_recorrido">Start pathing</string>
+    <string name="deseas_empezar_recorrido">Do you want to start a pathing?</string>
+
+    <string name="crear_reporte">Make a Report</string>
+    <string name="desea_crear_reporte">Do you want to make a report here?</string>
+
+    <string name="datos_tarea">Task Data</string>
+    <string name="descripcion">Description</string>
+
+    <string name="debes_estar_dentro_subcampo">You must be inside the Subfield to start a Pathing</string>
+
+    <string name="localizando_subcampo">Locating your Subfield</string>
+
+    <string name="seleccionar_ingeniero">Select Engineer</string>
+
+    <string name="Establecer_Fin">Delivery term</string>
+    <string name="Vence">Deadline:</string>
+    <string name="fecha_comienzo">Start date:</string>
+    <string name="no_hay_fecha_limite">There is no deadline</string>
+
+
+
+
+
+    <string name="ingenieros">Engineers</string>
+    <string name="no_hay_ingenieros_disponibles">No Engineers Available</string>
+
+    <string name="agregar_ingeniero">Add Engineer</string>
+
+    <string name="selecciona_color">Select a Representative Color:</string>
+
+    <string name="marcador_no_puede_dentro_otros_subpredios">The Marker cannot be inside other SubFields</string>
+    <string name="marcador_debe_estar_dentro_predio">The Marker must be within the Field</string>
+    <string name="no_puedes_eliminar_ultimo_marcador">You cannot delete the last bookmark at this time</string>
+    <string name="marcador_no_puede_interferir_subpredios">The Marker may not interfere with SubFields</string>
+
+    <string name="datos_personales">Personal information</string>
+    <string name="datos_seguridad">Security data</string>
+
+    <string name="seleccionar_permisos">Select Permissions</string>
+    <string name="seleccionar_rol">Select a Role</string>
+    <string name="permiso_agregar_predio">Can Add Fields</string>
+    <string name="permiso_editar_ingeniero">Can Edit Engineers</string>
+    <string name="permiso_ver_reportes">Can See Reports</string>
+
+    <string name="tarea_registrada_exito">Task registered successfully</string>
+    <string name="no_pudo_registrar_tarea">The task could not be registered</string>
+    <string name="ingeniero_actualizado_exito">Engineer update sucessfull</string>
+
+    <string name="ingeniero_registrado_exito">Successfully Registered Engineer</string>
+    <string name="no_pudo_registrar_ingeniero">Could not register Engineer</string>
+
+    <string name="imagenes">Get Image</string>
+    <string name="donde_desea_obtener_imagen">Where do you want to get the image?</string>
+
+    <string name="camara">Camera</string>
+    <string name="galeria">Gallery</string>
+
+    <string name="seleccione_una_imagen">Select an image</string>
+
+    <string name="no_hay_imagenes_ni_videos">No Images and Videos Selected</string>
+    <string name="deseas_editar_tarea">Do you want to edit this Job?</string>
+    <string name="deseas_editar_ingeniero">Do you want to edit this Engineer?</string>
+    <string name="deseas_eliminar_ingeniero">Do you want to remove this Engineer?</string>
+
+    <string name="videos">Get Video</string>
+    <string name="donde_desea_obtener_video">Do you want to get the video?</string>
+    <string name="seleccione_un_video">Select a video</string>
+
+    <string name="nuevo_rol">New Role</string>
+
+    <string name="editar_ingeniero">Edit Engineer</string>
+
+    <string name="ingeniero_editado_exito">Engineer successfully edited</string>
+    <string name="no_pudo_editar_ingeniero">Could not edit the Engineer</string>
+
+    <string name="deseacrearunsubpredio">Do you want to create a SubField?</string>
+
+    <string name="crear">Create</string>
+
+    <string name="observacion">Observation</string>
+
+    <string name="hayincidencia">Is there an Incidence?</string>
+
+    <string name="descripciondeincidencia">Incident Description</string>
+
+    <string name="seleccione_tipo_incidencia">Select the type of Incident</string>
+
+    <string name="agricola">Agricultural</string>
+    <string name="tecnica">Technique</string>
+
+    <string name="seleccionar_incidencia">Select Incidence</string>
+
+    <string name="incidencia_nueva">New Incidence</string>
+
+    <string name="suelo">Ground</string>
+    <string name="tallo">Stem</string>
+    <string name="hoja">Leaf</string>
+    <string name="fruto">Fruit</string>
+
+    <string name="nivel_peligro">Hazard level</string>
+    <string name="verde">Green</string>
+    <string name="amarillo">Yellow</string>
+    <string name="rojo">Red</string>
+
+    <string name="bienvenido_agronodo">Welcome to AgroNodo</string>
+
+    <string name="agronodo_intro">Agronodo is a support tool for the farmer and the agronomist with the idea of ​​streamlining the process of reporting incidents, observations and anomalies in the plots. Feel free to explore in the app and use it at your best convenience.</string>
+
+    <string name="sincronizandopredios">Synchronizing fields</string>
+    <string name="sincronizandocultivos">Synchronizing Crops</string>
+    <string name="sincronizandoingenieros">Synchronizing Engineers</string>
+
+    <string name="recorridopequen">The pathing is very small</string>
+
+    <string name="desea_finalizar_recorrido">Do you want to finish the pathing?</string>
+
+    <string name="no_hay_ciclo_asignado">No Assigned Cycle</string>
+    <string name="desea_asignale_un_ciclo">Do you want to assign a new cycle?</string>
+
+    <string name="agregar_ciclo">Add Cycle</string>
+
+    <string name="finalizar">Finalize</string>
+
+    <string name="ciclo_agregado_correctamente">Successfully Added Cycle</string>
+    <string name="no_se_pudo_agregar_ciclo">Could not add Cycle</string>
+
+    <string name="recorrido_agregado_correctamente">Successfully Added Pathing</string>
+    <string name="no_se_pudo_agregar_recorrido">Could not add the Pathing</string>
+
+    <string name="reporte_agregado_correctamente">Report Added Successfully</string>
+    <string name="no_se_pudo_agregar_reporte">Could not add the Report</string>
+
+    <string name="incidencia_agregado_correctamente">Incidence Successfully Added</string>
+    <string name="no_se_pudo_agregar_incidencia">Could not add Incident</string>
+
+    <string name="multimedia_agregado_correctamente">Multimedia Added Successfully</string>
+    <string name="no_se_pudo_agregar_multimedia">Multimedia could not be added</string>
+
+    <string name="guardando_recorrido">Saving Pathing</string>
+
+    <string name="semana">Week</string>
+
+    <string name="recorrido">Path</string>
+
+    <string name="tarea_agregada_correctamente">Task Added Successfully</string>
+    <string name="no_se_pudo_agregar_tarea">Could not add Task</string>
+
+    <string name="reportes">Reports</string>
+
+    <string name="tipo_incidencia">Incident Type</string>
+
+    <string name="datos_incidencia">Incidence Data</string>
+
+    <string name="enviandopredios">Uploading Fields</string>
+    <string name="enviandocultivos">Uploading Crops</string>
+    <string name="enviandorecorridos">Uploading Pathings</string>
+    <string name="descargandopredios">Downloading Fields</string>
+    <string name="descargandocultivos">Downloading Crops</string>
+</resources>

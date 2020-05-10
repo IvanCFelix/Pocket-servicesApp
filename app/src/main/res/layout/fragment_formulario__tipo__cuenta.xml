@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="70dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo de cuenta"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="30sp"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="15dp"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:tint="@color/colorBlue"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dp"
+                            app:srcCompat="@drawable/ic_persona" />
+
+                        <Spinner
+                            android:id="@+id/spn_tipoUsuario"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/ly_datos"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:hint="Nombre de empresa"
+                        android:textColorHint="@color/colorBlue"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="50"
+                        app:errorEnabled="true">
+
+                        <EditText
+                            android:id="@+id/txt_NombreEmpresa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_persona"
+                            android:drawablePadding="10dp"
+                            android:drawableTint="@color/colorBlue"
+                            android:inputType="textPersonName|textCapSentences|textCapWords"
+                            android:maxLength="50"
+                            android:textAlignment="textStart"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:hint="Calle"
+                        android:textColorHint="@color/colorBlue"
+                        app:counterEnabled="true"
+                        app:errorEnabled="true">
+
+                        <EditText
+                            android:id="@+id/txt_Calle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_casa"
+                            android:drawablePadding="10dp"
+                            android:drawableTint="@color/colorBlue"
+                            android:inputType="textPersonName|textCapSentences|textCapWords"
+
+                            android:textAlignment="textStart"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:hint="Colonia"
+                        android:textColorHint="@color/colorBlue"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="50"
+                        app:errorEnabled="true">
+
+                        <EditText
+                            android:id="@+id/txt_Colonia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_casa"
+                            android:drawablePadding="10dp"
+                            android:drawableTint="@color/colorBlue"
+                            android:inputType="textPersonName|textCapSentences|textCapWords"
+                            android:maxLength="50"
+                            android:textAlignment="textStart"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:hint="# No. Exterior"
+                            android:textColorHint="@color/colorBlue"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="50"
+                            app:errorEnabled="true">
+
+                            <EditText
+                                android:id="@+id/txt_numero"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:drawableTint="@color/colorBlue"
+                                android:inputType="textPersonName|textCapSentences|textCapWords"
+                                android:maxLength="50"
+                                android:textAlignment="textStart"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
