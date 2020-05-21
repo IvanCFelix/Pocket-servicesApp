@@ -1,6 +1,7 @@
 package com.c_felix.pocketmarket.Añadir.Usuario;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -21,7 +22,9 @@ public class Formulario_Tipo_Cuenta extends Fragment {
     Spinner spn_tipoCuenta;
     ArrayList<String> listaRoles = new ArrayList<>();
     LinearLayout lyDatos;
-    EditText empresa;
+    TextInputLayout empresa;
+    EditText txt_empresa, txt_calle,txt_colonia,txt_numExt;
+
     public Formulario_Tipo_Cuenta() {
 
     }
@@ -35,11 +38,12 @@ public class Formulario_Tipo_Cuenta extends Fragment {
 
         spn_tipoCuenta = view.findViewById(R.id.spn_tipoUsuario);
         lyDatos = view.findViewById(R.id.ly_datos);
-        empresa = view.findViewById(R.id.txt_NombreEmpresa);
+        empresa = view.findViewById(R.id.ty_NombreEmpresa);
+        txt_empresa = view.findViewById(R.id.txt_nomEmpresa);
+        
         listaRoles.add("Tipo de cuenta..");
         listaRoles.add("Vendedor");
         listaRoles.add("Comprador");
-        listaRoles.add("Repartidor");
         spn_tipoCuenta.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, listaRoles));
 
         spn_tipoCuenta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -52,6 +56,8 @@ public class Formulario_Tipo_Cuenta extends Fragment {
                 }else if(spn_tipoCuenta.getSelectedItemPosition()==2) {
                     lyDatos.setVisibility(View.VISIBLE);
                     empresa.setVisibility(View.GONE);
+                }else{
+                    lyDatos.setVisibility(View.GONE);
                 }
             }
 

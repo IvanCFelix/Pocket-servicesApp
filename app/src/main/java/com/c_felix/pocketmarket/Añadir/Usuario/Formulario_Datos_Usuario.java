@@ -29,7 +29,7 @@ import java.io.IOException;
 public class Formulario_Datos_Usuario extends Fragment {
     ImageView ivImagen;
     FloatingActionButton fabAgregarImagen;
-    EditText txtNombre, txt_Username, txtCorreo, txtTelefono;
+    EditText txtNombre, txt_Username, txtCorreo, txtTelefono,txt_password;
     Bitmap bmpImagen;
 
     public Formulario_Datos_Usuario() {
@@ -48,7 +48,7 @@ public class Formulario_Datos_Usuario extends Fragment {
         txtCorreo = view.findViewById(R.id.txt_Correo);
         txtTelefono = view.findViewById(R.id.txt_Telefono);
         txt_Username = view.findViewById(R.id.txt_Username);
-
+        txt_password = view.findViewById(R.id.txt_password);
 
         fabAgregarImagen.setOnClickListener(new View.OnClickListener() {
             @Override

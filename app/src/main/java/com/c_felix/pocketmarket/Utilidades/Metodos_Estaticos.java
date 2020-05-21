@@ -13,6 +13,7 @@ import android.support.v4.content.FileProvider;
 
 import com.c_felix.pocketmarket.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -99,12 +100,22 @@ public class Metodos_Estaticos {
             try {
                 File archivo_foto = crearFoto(activity);
                 if (archivo_foto != null) {
-                    Uri uri_foto = FileProvider.getUriForFile(context, "com.fragmentoestudio.agronodo", archivo_foto);
+                    Uri uri_foto = FileProvider.getUriForFile(context, "com.c_felix.pocketmarket", archivo_foto);
                     intentCamara.putExtra(MediaStore.EXTRA_OUTPUT, uri_foto);
                     activity.startActivityForResult(intentCamara, codigo);
                 }
             } catch (IOException ex) {
             }
         }
+    }
+
+    public static byte[] imagenArrayBytes(Bitmap imagen, String formato) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        if (formato.equals("png")) {
+            imagen.compress(Bitmap.CompressFormat.PNG, 30, bos);
+        } else {
+            imagen.compress(Bitmap.CompressFormat.JPEG, 30, bos);
+        }
+        return bos.toByteArray();
     }
 }
