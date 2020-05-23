@@ -11,7 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.c_felix.pocketmarket.Añadir.Usuario.Activity_Registrar_Usuario;
+import com.c_felix.pocketmarket.Agregar.Usuario.Activity_Registrar_Usuario;
+import com.c_felix.pocketmarket.Clases.UsuarioActivo;
 import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
@@ -22,7 +23,7 @@ public class Login extends AppCompatActivity {
     EditText username, password;
     public static final int MULTIPLE_PERMISSIONS_REQUEST_CODE = 3;
     public static final String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-    ArrayList<Usuarios>usuarios;
+    ArrayList<UsuarioActivo> activo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,15 +34,30 @@ public class Login extends AppCompatActivity {
         password=findViewById(R.id.txt_Login_Contraseña);
 
         PedirPermisos();
-        usuarios = SQLITE.obtenerUsuarios(Login.this);
-        Toast.makeText(this, usuarios.size()+"", Toast.LENGTH_SHORT).show();
-
+        activo = SQLITE.obtenerUsuarioActivo(Login.this);
+        if(activo.size()!=0){
+            startActivity(new Intent(Login.this, Menu_Vendedor.class).putExtra("Usuario",activo.get(0).getID()));
+            finish();
+        }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Usuarios usuario = SQLITE.obtenerUsuarioUsername(Login.this,username.getText().toString());
-                Toast.makeText(Login.this, usuario.getUsername()+"", Toast.LENGTH_SHORT).show();
+                Usuarios usuario = SQLITE.obtenerUsuarioUsername(Login.this,username.getText().toString());
+                if(usuario==null){
+                    Toast.makeText(Login.this, "Nombre de usuario incorrecto", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(password.getText().toString().equals(usuario.getContraseña())){
+                        startActivity(new Intent(Login.this, Menu_Vendedor.class).putExtra("Usuario",usuario.getID()));
+                        UsuarioActivo usuarioActivo = new UsuarioActivo();
+                        usuarioActivo.setID(usuario.getID());
+                        usuarioActivo.setUsername(usuario.getUsername());
+                        SQLITE.usuarioActivo(Login.this,usuarioActivo);
+                        finish();
+                    }else{
+                        Toast.makeText(Login.this, "Contraseña incorrecta   ", Toast.LENGTH_SHORT).show();
 
+                    }
+                }
             }
         });
 

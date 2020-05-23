@@ -1,8 +1,7 @@
-package com.c_felix.pocketmarket.Añadir.Usuario;
+package com.c_felix.pocketmarket.Agregar.Usuario;
 
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,9 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.c_felix.pocketmarket.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -26,10 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

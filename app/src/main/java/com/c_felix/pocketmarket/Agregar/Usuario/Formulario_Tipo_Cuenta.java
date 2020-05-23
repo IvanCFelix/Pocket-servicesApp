@@ -1,9 +1,8 @@
-package com.c_felix.pocketmarket.Añadir.Usuario;
+package com.c_felix.pocketmarket.Agregar.Usuario;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

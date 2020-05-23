@@ -10,24 +10,26 @@
             android:title="@string/inicio" />
 
         <item
-            android:id="@+id/nav_Lista_Predios"
-            android:icon="@drawable/ic_campo"
-            android:title="@string/mis_predios" />
+            android:id="@+id/nav_Lista_Productos"
+            android:icon="@drawable/ic_productos"
+            android:title="Mis productos" />
 
         <item
-            android:id="@+id/nav_Mapa_Predios"
-            android:icon="@drawable/ic_mapa"
-            android:title="@string/mi_mapa" />
-
-        <item
-            android:id="@+id/nav_Lista_Tareas"
+            android:id="@+id/nav_Mapa_pedidos"
             android:icon="@drawable/ic_tareas"
-            android:title="@string/tareas" />
+            android:title="Pedidos" />
 
         <item
-            android:id="@+id/nav_Ingenieros"
+            android:id="@+id/nav_Carrito"
+            android:icon="@drawable/ic_carrito_compras"
+            android:title="Carrito" />
+
+
+
+        <item
+            android:id="@+id/nav_Repartidores"
             android:icon="@drawable/ic_personas"
-            android:title="@string/ingenieros" />
+            android:title="Repartidores" />
 
         <item
             android:id="@+id/nav_Mi_Usuario"

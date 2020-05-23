@@ -1,4 +1,4 @@
-package com.c_felix.pocketmarket.Añadir.Usuario;
+package com.c_felix.pocketmarket.Agregar.Usuario;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
