@@ -17,6 +17,7 @@ public class SQLITE {
     public static final String tablaUsuarios = "Usuarios";
     public static final String tablaUsuarioActivo= "UsuarioActivo";
     public static final String tablaRepartidores = "Repartidores";
+    public static final String tablaMultimedia = "Multimedia";
 
 
     public static int obtenerValorMaximo(Context contexto, String tabla, String campo) {

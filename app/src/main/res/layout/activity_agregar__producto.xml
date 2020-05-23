@@ -60,7 +60,7 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:id="@+id/iv_RegistrarReporte_Foto"
+                                android:id="@+id/iv_RegistrarFoto"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
@@ -112,7 +112,7 @@
                             app:errorEnabled="true">
 
                             <EditText
-                                android:id="@+id/txt_descripcion_prducto"
+                                android:id="@+id/txt_descripcion_producto"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="10dp"
@@ -138,7 +138,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:paddingBottom="10dp"
-                                    android:id="@+id/spn_categoria_producto"/>
+                                    android:id="@+id/spn_tipoUnidad"/>
 
 
 
@@ -155,7 +155,7 @@
                                 android:hint="Cantidad disponible">
 
                                 <EditText
-                                    android:id="@+id/txt_AgregarReporte_IncidenciaAgropecuaria"
+                                    android:id="@+id/txt_stockProducto"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="textStart"
@@ -185,7 +185,7 @@
                                 app:errorEnabled="true">
 
                                 <EditText
-                                    android:id="@+id/txt_RegistrarReporte_DescripcionIncidencia"
+                                    android:id="@+id/txt_precioProducto"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:drawablePadding="15dp"
@@ -201,24 +201,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingBottom="20dp"
-                            android:id="@+id/spn_AgregarReporte_tipoIncidencia"/>
-                        <Button
-                            android:id="@+id/btn_RegistrarReporte"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="29dp"
-                            android:background="@drawable/boton_redondo"
-                            android:text="Agregar"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="25sp"
-                            android:textStyle="bold" />
+                            android:id="@+id/spn_categoria_producto"/>
+
                         </LinearLayout>
                 </android.support.v7.widget.CardView>
-
-
-                    </LinearLayout>
+                <Button
+                    android:id="@+id/btn_agg_producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/boton_redondo"
+                    android:text="Agregar"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+             </LinearLayout>
         </ScrollView>
 
 </FrameLayout>

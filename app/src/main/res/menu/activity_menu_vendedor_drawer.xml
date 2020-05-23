@@ -42,12 +42,8 @@
             android:title="@string/notificaciones" />
     </group>
 
-    <item android:title="@string/acerca_agronodo">
+    <item android:title="Control de cuentas">
         <menu>
-            <item
-                android:id="@+id/nav_web"
-                android:icon="@drawable/ic_internet"
-                android:title="@string/sitio_web" />
             <item
                 android:id="@+id/nav_salir"
                 android:icon="@drawable/ic_salir"
