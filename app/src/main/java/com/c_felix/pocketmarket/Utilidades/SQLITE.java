@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.c_felix.pocketmarket.Clases.Productos;
@@ -17,6 +18,7 @@ public class SQLITE {
     public static final String tablaUsuarios = "Usuarios";
     public static final String tablaUsuarioActivo= "UsuarioActivo";
     public static final String tablaRepartidores = "Repartidores";
+    public static final String tablaProductos = "Productos";
     public static final String tablaMultimedia = "Multimedia";
 
 
@@ -33,6 +35,35 @@ public class SQLITE {
             }
         }
         return 1;
+    }
+    public static int obtenerTamañoTabla(Context contexto, String tabla) {
+        Base_Datos base_datos = new Base_Datos(contexto);
+        SQLiteDatabase db = base_datos.getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("select * from " + tabla + ";", null);
+            int contador = c.getCount();
+            db.close();
+            return contador;
+        }
+        return 0;
+    }
+
+    public static Bitmap obtenerImagen(Context contexto, int ID) {
+        if (obtenerTamañoTabla(contexto, tablaUsuarioActivo) == 1) {
+            Base_Datos base_de_datos = new Base_Datos(contexto);
+            SQLiteDatabase db = base_de_datos.getWritableDatabase();
+            if (db != null) {
+                Cursor c = db.rawQuery("select * from " + tablaUsuarios +" where ID = "+ ID+ " ;", null);
+                if (c.getCount() > 0) {
+                    if (c.moveToFirst()) {
+                        Bitmap imagen = BitmapFactory.decodeByteArray(c.getBlob(9), 0, c.getBlob(9).length);
+                        db.close();
+                        return imagen;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public static int agregarUsuario(Context context, Usuarios usuario, String formato_imagen) {
@@ -147,17 +178,37 @@ public class SQLITE {
         db.execSQL("delete from " + tabla + ";");
         db.close();
     }
+    public static int agregarProducto(Context context, Productos producto, String formato_imagen) {
+        Base_Datos bd = new Base_Datos(context);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            ContentValues registro = new ContentValues();
+            registro.put("ID", producto.getID());
+            registro.put("ID_Usuario", producto.getID_usuario());
+            registro.put("Titulo", producto.getTitulo());
+            registro.put("Descripcion", producto.getDescripcion());
+            registro.put("UnidadMedida",producto.getUnidadMedida());
+            registro.put("Categoria", producto.getCategoria());
+            registro.put("Inventario", producto.getInventario());
+            registro.put("PrecioUnidad", producto.getPrecioUnidad());
+            registro.put("Imagen", Metodos_Estaticos.imagenArrayBytes(producto.getImagen(), formato_imagen));
+            db.insert(SQLITE.tablaProductos, null, registro);
+            db.close();
+            return 1;
+        }
+        return 2;
+    }
 
     public static ArrayList<Productos> obtenerProductos(Context contexto) {
         Base_Datos base_datos = new Base_Datos(contexto);
         SQLiteDatabase db = base_datos.getWritableDatabase();
         if (db != null) {
             ArrayList<Productos> lista = new ArrayList<>();
-            Cursor c = db.rawQuery("select * from " + tablaUsuarios + ";", null);
+            Cursor c = db.rawQuery("select * from " + tablaProductos + ";", null);
             if (c.getCount() > 0) {
                 if (c.moveToFirst()) {
                     do {
-                    //    lista.add(new Usuarios(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getString(6),c.getString(7),c.getString(8),BitmapFactory.decodeByteArray(c.getBlob(9), 0, c.getBlob(9).length)));
+                     lista.add(new Productos(c.getInt(0),c.getInt(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6),c.getFloat(7),BitmapFactory.decodeByteArray(c.getBlob(8), 0, c.getBlob(8).length)));
                     } while (c.moveToNext());
                 }
             }
@@ -165,4 +216,16 @@ public class SQLITE {
         }
         return null;
     }
+
+    public static int borrarProducto(Context contexto, int id) {
+        Base_Datos bd = new Base_Datos(contexto);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            db.execSQL("DELETE FROM " + SQLITE.tablaProductos + " WHERE ID =" + id + ";");
+            db.close();
+            return 1;
+        }
+        return 2;
+    }
+
 }

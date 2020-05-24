@@ -1,19 +1,28 @@
 package com.c_felix.pocketmarket.Clases;
 
+import android.graphics.Bitmap;
+
+import java.sql.Blob;
+
 public class Productos {
     String Titulo,Descripcion,UnidadMedida,Categoria;
     int ID,ID_usuario,inventario;
     double PrecioUnidad;
+   Bitmap Imagen;
 
-    public Productos(String titulo, String descripcion, String unidadMedida, String categoria, int ID, int ID_usuario, int inventario, double precioUnidad) {
+    public Productos(int ID, int ID_usuario, String titulo, String descripcion, String unidadMedida, String categoria, int inventario, double precioUnidad,Bitmap imagen) {
+        this.ID = ID;
+        this.ID_usuario = ID_usuario;
         Titulo = titulo;
         Descripcion = descripcion;
         UnidadMedida = unidadMedida;
         Categoria = categoria;
-        this.ID = ID;
-        this.ID_usuario = ID_usuario;
         this.inventario = inventario;
         this.PrecioUnidad = precioUnidad;
+        this.Imagen = imagen;
+    }
+
+    public Productos() {
     }
 
     public String getTitulo() {
@@ -78,5 +87,13 @@ public class Productos {
 
     public void setPrecioUnidad(double precioUnidad) {
         this.PrecioUnidad = precioUnidad;
+    }
+
+    public Bitmap getImagen() {
+        return Imagen;
+    }
+
+    public void setImagen(Bitmap imagen) {
+        Imagen = imagen;
     }
 }

@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.c_felix.pocketmarket.Adaptadores.Mi_Usuario;
 import com.c_felix.pocketmarket.Listas.Productos.Lista_Productos;
+import com.c_felix.pocketmarket.Utilidades.Base_Datos;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
 import de.hdodenhof.circleimageview.CircleImageView;

@@ -48,13 +48,13 @@ public class Lista_Seleccionar_Producto_Adaptador extends RecyclerView.Adapter<L
         final Productos productos = productos_filtrados.get(position);
         if(position==0) holder.divisor.setVisibility(View.GONE);
         holder.txtNombre.setText(productos.getTitulo());
-        //holder.ivFoto.setImageBitmap(producto.getFoto());
+        holder.ivFoto.setImageBitmap(productos.getImagen());
         holder.ivEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context);
                 dialogo1.setCancelable(false);
-                dialogo1.setMessage(context.getString(R.string.deseas_editar_ingeniero));
+                dialogo1.setMessage("¿sDesea editar este producto?");
                 dialogo1.setPositiveButton(context.getString(R.string.editar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
                       //  context.startActivity(new Intent(context, Activity_Editar_Ingeniero.class).putExtra("ID", ingeniero.getID()));
@@ -74,11 +74,11 @@ public class Lista_Seleccionar_Producto_Adaptador extends RecyclerView.Adapter<L
             public void onClick(View view) {
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context);
                 dialogo1.setCancelable(false);
-                dialogo1.setMessage(context.getString(R.string.deseas_eliminar_ingeniero));
+                dialogo1.setMessage(context.getString(R.string.deseas_eliminar_producto));
                 dialogo1.setPositiveButton(context.getString(R.string.eliminar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
 
-                         //   SQLITE.borrarIngeniero(context, ingeniero.getID());
+                         SQLITE.borrarProducto(context,productos.getID());
 
                         ArrayList<Productos> productos = SQLITE.obtenerProductos(context);
                         if(productos.isEmpty()){
@@ -116,7 +116,7 @@ public class Lista_Seleccionar_Producto_Adaptador extends RecyclerView.Adapter<L
 
         TextView txtNombre;
         LinearLayout layout;
-        ImageView ivFoto, ivEditar, ivEliminar, ivModificado;
+        ImageView ivFoto, ivEditar, ivEliminar;
         View divisor;
 
         public ViewHolder(@NonNull final View itemView) {
@@ -127,7 +127,7 @@ public class Lista_Seleccionar_Producto_Adaptador extends RecyclerView.Adapter<L
             ivEditar = itemView.findViewById(R.id.rvEditar);
             ivEliminar = itemView.findViewById(R.id.rvEliminar);
             layout = itemView.findViewById(R.id.rv_lyTitulo);
-            ivModificado = itemView.findViewById(R.id.rv_iconomodificado);
+
         }
     }
 }

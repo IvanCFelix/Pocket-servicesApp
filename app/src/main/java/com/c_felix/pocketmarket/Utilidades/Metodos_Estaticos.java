@@ -3,6 +3,8 @@ package com.c_felix.pocketmarket.Utilidades;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
@@ -117,5 +119,20 @@ public class Metodos_Estaticos {
             imagen.compress(Bitmap.CompressFormat.JPEG, 30, bos);
         }
         return bos.toByteArray();
+    }
+
+    public static int obtenerValorMaximo(Context contexto, String tabla, String campo) {
+        Base_Datos bd = new Base_Datos(contexto);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("select MAX(" + campo + ") from " + tabla + " ;", null);
+            if (c.getCount() == 1) {
+                c.moveToFirst();
+                int valor = c.getInt(0);
+                db.close();
+                return valor;
+            }
+        }
+        return 1;
     }
 }

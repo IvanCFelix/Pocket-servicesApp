@@ -1,5 +1,7 @@
 package com.c_felix.pocketmarket.Adaptadores;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,7 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.c_felix.pocketmarket.Clases.UsuarioActivo;
+import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.R;
+import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
+import com.c_felix.pocketmarket.Utilidades.SQLITE;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,9 +29,9 @@ public class Mi_Usuario extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     String Usuario;
-
+    ArrayList<UsuarioActivo> usuarioActivo = new ArrayList<>();
     TextView txtNombre, txtCorreo;
-
+    Usuarios usuario;
     public Mi_Usuario() {
         // Required empty public constructor
     }
@@ -39,43 +47,18 @@ public class Mi_Usuario extends Fragment {
         txtNombre = view.findViewById(R.id.txt_perfil_nombre);
         swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorGreen);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Esto se ejecuta cada vez que se realiza el gesto
-                try {
-                    PrimeThread p = new PrimeThread(140);
-                    p.start();
-                } catch (Exception e) {
-                    if (swipeRefreshLayout.isRefreshing())
-                        swipeRefreshLayout.setRefreshing(false);
-                }
-            }
-        });
+
 
         getActivity().setTitle(" " + getString(R.string.mi_usuario));
+
+        usuarioActivo = SQLITE.obtenerUsuarioActivo(getContext());
+        usuario = SQLITE.obtenerUsuario(getContext(),usuarioActivo.get(0).getID());
+        Bitmap imagen = SQLITE.obtenerImagen(getContext(),usuario.getID());
+        txtNombre.setText(usuario.getNombre().trim());
+        txtCorreo.setText(usuario.getCorreo());
+        civPerfil.setImageBitmap(imagen);
 
         return  view;
     }
 
-    class PrimeThread extends Thread {
-        long minPrime;
-
-        PrimeThread(long minPrime) {
-            this.minPrime = minPrime;
-        }
-
-        public void run() {
-           // leerUsuario();
-        }
-    }
-
-    public void leerUsuario(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-    }
 }

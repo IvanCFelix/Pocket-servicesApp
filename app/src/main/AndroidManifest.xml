@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Agregar.Productos.Agregar_Producto"></activity>
+        <activity android:name=".Agregar.Producto.Formulario_Producto"></activity>
+        <activity android:name=".Agregar.Productos.Agregar_Producto" />
         <activity
             android:name=".Menu_Vendedor"
             android:theme="@style/AppTheme.NoActionBar" />

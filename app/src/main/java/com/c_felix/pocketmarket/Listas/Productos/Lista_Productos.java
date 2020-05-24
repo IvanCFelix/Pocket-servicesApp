@@ -12,18 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c_felix.pocketmarket.Adaptadores.Lista_Seleccionar_Producto_Adaptador;
-import com.c_felix.pocketmarket.Agregar.Productos.Agregar_Producto;
+import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Producto;
 import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Lista_Productos extends Fragment {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -58,7 +56,7 @@ public class Lista_Productos extends Fragment {
         fabAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Agregar_Producto.class));
+                startActivity(new Intent(getContext(), Formulario_Producto.class));
             }
         });
         return view;
@@ -92,6 +90,7 @@ public class Lista_Productos extends Fragment {
             public void run() {
                 try {
                     ArrayList<Productos> productos= SQLITE.obtenerProductos(getContext());
+                    Toast.makeText(getContext(), productos.size()+"", Toast.LENGTH_SHORT).show();
                     adapter = new Lista_Seleccionar_Producto_Adaptador(productos, getContext(), recyclerView, txtNoHay);
                     recyclerView.setAdapter(adapter);
                     if (productos.isEmpty() || productos == null) {
@@ -100,6 +99,7 @@ public class Lista_Productos extends Fragment {
                         txtNoHay.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
+                    Toast.makeText(getContext(), e+"", Toast.LENGTH_SHORT).show();
                 }
 
             }

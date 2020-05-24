@@ -14,8 +14,7 @@
         android:layout_marginRight="10dp"
         android:background="#dcdcdc"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -34,27 +33,16 @@
                 android:layout_marginRight="80dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
-                android:paddingVertical="16dp"
+
                 android:paddingRight="5dp">
 
-                <ImageView
-                    android:id="@+id/rv_iconomodificado"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="6dp"
-                    android:layout_marginLeft="10dp"
-                    android:padding="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_almacenamiento"
-                    android:tint="@color/colorBlack" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/rv_ivFoto"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/abrir_galeria" />
+              <ImageView
+                  android:paddingLeft="5dp"
+                  android:id="@+id/rv_ivFoto"
+                  android:layout_width="100dp"
+                  android:layout_height="100dp"
+                  android:layout_gravity="center"
+                  android:src="@drawable/abrir_galeria"/>
 
                 <TextView
                     android:id="@+id/rv_txtNombre"
