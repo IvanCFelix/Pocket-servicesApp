@@ -2,6 +2,7 @@ package com.c_felix.pocketmarket.Adaptadores;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.c_felix.pocketmarket.Clases.Carrito;
 import com.c_felix.pocketmarket.Clases.Productos;
+import com.c_felix.pocketmarket.Desplegar.Pedidos.Mapa_Ubicacion_Pedido;
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
@@ -38,7 +40,6 @@ public class Desplegar_Pedidos_Adaptador extends RecyclerView.Adapter<Desplegar_
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_pedido_adapter, parent, false);
-        carritos = SQLITE.obtenerCarrito(context);
 
         return new ViewHolder(view);
     }
@@ -47,7 +48,12 @@ public class Desplegar_Pedidos_Adaptador extends RecyclerView.Adapter<Desplegar_
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Productos productos = productos_filtrados.get(position);
         holder.txtNombre.setText(productos.getTitulo());
-
+        holder.rv_vizualisar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, Mapa_Ubicacion_Pedido.class));
+            }
+        });
 
 
     }
@@ -61,11 +67,12 @@ public class Desplegar_Pedidos_Adaptador extends RecyclerView.Adapter<Desplegar_
 
         TextView txtNombre;
         LinearLayout layout;
+        ImageView rv_vizualisar;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             txtNombre = itemView.findViewById(R.id.txt_titulo);
-
+            rv_vizualisar = itemView.findViewById(R.id.rv_ivVisualizar);
 
         }
     }

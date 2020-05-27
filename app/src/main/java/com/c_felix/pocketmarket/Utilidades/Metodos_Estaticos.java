@@ -14,12 +14,15 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 
 import com.c_felix.pocketmarket.R;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Metodos_Estaticos {
     public static final int CODIGO_GALERIA_FOTO = 1;
@@ -134,5 +137,11 @@ public class Metodos_Estaticos {
             }
         }
         return 1;
+    }
+
+    public static LatLngBounds obtenerCentroMapa(final LatLng coordenadas) {
+        final LatLngBounds.Builder centerBuilder = LatLngBounds.builder();
+            centerBuilder.include(coordenadas);
+        return centerBuilder.build();
     }
 }

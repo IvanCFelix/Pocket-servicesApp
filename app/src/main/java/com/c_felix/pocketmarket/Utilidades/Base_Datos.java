@@ -37,8 +37,7 @@ public class Base_Datos extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaUsuarioActivo);
-        db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaCarrito);
-        db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaPedidos);
+
 
         SharedPreferences pref = context.getSharedPreferences("intro", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

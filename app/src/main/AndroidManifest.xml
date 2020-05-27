@@ -22,10 +22,10 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Desplegar.Pedidos.Mapa_Ubicacion_Pedido"></activity>
         <activity android:name=".Desplegar.Activity_Desplegar_Producto" />
         <activity android:name=".Agregar.Producto.Formulario_Producto" />
         <activity android:name=".Desplegar.Pedidos.Lista_Pedidos" />
-
         <activity
             android:name=".Menu_Vendedor"
             android:theme="@style/AppTheme.NoActionBar" />

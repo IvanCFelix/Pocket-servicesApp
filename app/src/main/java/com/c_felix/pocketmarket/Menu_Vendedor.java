@@ -166,7 +166,7 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
                 dialogo1.setPositiveButton(getString(R.string.confirmar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
                         SQLITE.limpiarTabla(Menu_Vendedor.this,SQLITE.tablaUsuarioActivo);
-                        SQLITE.limpiarTabla(Menu_Vendedor.this,SQLITE.tablaCarrito);
+                     //   SQLITE.limpiarTabla(Menu_Vendedor.this,SQLITE.tablaCarrito);
 
                         startActivity(new Intent(Menu_Vendedor.this, Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
