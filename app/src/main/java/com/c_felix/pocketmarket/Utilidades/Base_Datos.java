@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 public class Base_Datos extends SQLiteOpenHelper {
     public static final String nombreBaseDatos = "PocketMarket";
-    public static final int Version = 7;
+    public static final int Version = 13;
     Context context;
 
 
@@ -28,15 +28,18 @@ public class Base_Datos extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaUsuarios + "(ID Number, Nombre Text,Empresa Text, Username Text, Correo Text, Contraseña Text, TipoUsuario Text, NumeroTel Text, Ubicacion Text,Imagen Blob );");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaUsuarioActivo + "(ID Number, Username text );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaCarrito + "(ID Number,ID_Producto Number, ID_Usuario Number,Cantidad Number );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaPedidos + "(ID Number,ID_Producto Number, ID_Usuario Number,Cantidad Number, PorPagar Real );");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaProductos + "(ID Number, ID_Usuario Number, Titulo Text,Descripcion Text,UnidadMedida Text ,Categoria Text, Inventario Text,PrecioUnidad Real, Imagen Blob );");
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaMultimedia + "(ID Number,ID_Usuario,Imagen blob );");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaUsuarioActivo);
-        db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaProductos);
+        db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaCarrito);
+        db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaPedidos);
+
         SharedPreferences pref = context.getSharedPreferences("intro", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();

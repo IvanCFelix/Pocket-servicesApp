@@ -110,7 +110,7 @@ public class Formulario_Producto extends AppCompatActivity {
                     Toast.makeText(Formulario_Producto.this, "Complete los datos correctamente", Toast.LENGTH_SHORT).show();
                 }else{
                     Productos producto = new Productos();
-                    producto.setID(Metodos_Estaticos.obtenerValorMaximo(Formulario_Producto.this, SQLITE.tablaProductos,"ID"));
+                    producto.setID(Metodos_Estaticos.obtenerValorMaximo(Formulario_Producto.this, SQLITE.tablaProductos,"ID")+1);
                     producto.setID_usuario(usuarioActivos.get(0).getID());
                     producto.setTitulo(titulo.getText().toString().trim());
                     producto.setDescripcion(descripcion.getText().toString().trim());
@@ -122,7 +122,7 @@ public class Formulario_Producto extends AppCompatActivity {
                     SQLITE.agregarProducto(Formulario_Producto.this,producto,"jpg");
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Formulario_Producto.this);
                     dialogo1.setCancelable(false);
-                    dialogo1.setMessage("Usuario registrado exitosamente");
+                    dialogo1.setMessage("Producto registrado exitosamente");
                     dialogo1.setPositiveButton(getString(R.string.enterado), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             finish();

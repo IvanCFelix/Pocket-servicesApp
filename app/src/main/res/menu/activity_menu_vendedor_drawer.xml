@@ -15,7 +15,7 @@
             android:title="Mis productos" />
 
         <item
-            android:id="@+id/nav_Mapa_pedidos"
+            android:id="@+id/nav_pedidos"
             android:icon="@drawable/ic_tareas"
             android:title="Pedidos" />
 
@@ -25,21 +25,11 @@
             android:title="Carrito" />
 
 
-
-        <item
-            android:id="@+id/nav_Repartidores"
-            android:icon="@drawable/ic_personas"
-            android:title="Repartidores" />
-
         <item
             android:id="@+id/nav_Mi_Usuario"
             android:icon="@drawable/ic_persona"
             android:title="@string/mi_usuario" />
 
-        <item
-            android:id="@+id/nav_Mis_Notificaciones"
-            android:icon="@drawable/ic_notificacion"
-            android:title="@string/notificaciones" />
     </group>
 
     <item android:title="Control de cuentas">

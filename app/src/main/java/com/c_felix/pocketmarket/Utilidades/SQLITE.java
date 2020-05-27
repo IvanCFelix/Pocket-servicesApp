@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.c_felix.pocketmarket.Clases.Carrito;
+import com.c_felix.pocketmarket.Clases.Pedidos;
 import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
 import com.c_felix.pocketmarket.Clases.Usuarios;
@@ -17,10 +19,9 @@ import java.util.ArrayList;
 public class SQLITE {
     public static final String tablaUsuarios = "Usuarios";
     public static final String tablaUsuarioActivo= "UsuarioActivo";
-    public static final String tablaRepartidores = "Repartidores";
     public static final String tablaProductos = "Productos";
-    public static final String tablaMultimedia = "Multimedia";
-
+    public static final String tablaPedidos = "Pedido";
+    public static final String tablaCarrito = "Carrito";
 
     public static int obtenerValorMaximo(Context contexto, String tabla, String campo) {
         Base_Datos bd = new Base_Datos(contexto);
@@ -217,6 +218,24 @@ public class SQLITE {
         return null;
     }
 
+    public static ArrayList<Productos> obtenerProductosUser(Context contexto, int ID) {
+        Base_Datos base_datos = new Base_Datos(contexto);
+        SQLiteDatabase db = base_datos.getWritableDatabase();
+        if (db != null) {
+            ArrayList<Productos> lista = new ArrayList<>();
+            Cursor c = db.rawQuery("select * from " + tablaProductos+ " where ID_Usuario= "+ ID + ";", null);
+            if (c.getCount() > 0) {
+                if (c.moveToFirst()) {
+                    do {
+                        lista.add(new Productos(c.getInt(0),c.getInt(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6),c.getFloat(7),BitmapFactory.decodeByteArray(c.getBlob(8), 0, c.getBlob(8).length)));
+                    } while (c.moveToNext());
+                }
+            }
+            return lista;
+        }
+        return null;
+    }
+
     public static int borrarProducto(Context contexto, int id) {
         Base_Datos bd = new Base_Datos(contexto);
         SQLiteDatabase db = bd.getWritableDatabase();
@@ -226,6 +245,132 @@ public class SQLITE {
             return 1;
         }
         return 2;
+    }
+
+    public static Productos obtenerProducto(Context contexto, int ID) {
+        Base_Datos base_de_datos = new Base_Datos(contexto);
+        SQLiteDatabase db = base_de_datos.getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("select * from " + tablaProductos+ " where ID = "+ ID + " ;", null);
+            if (c.getCount() > 0) {
+                if (c.moveToFirst()) {
+                    Productos productos= new Productos(c.getInt(0),c.getInt(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6),c.getFloat(7),BitmapFactory.decodeByteArray(c.getBlob(8), 0, c.getBlob(8).length));
+                    db.close();
+                    return productos;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static int agregarCarrito(Context context, Carrito carrito) {
+        Base_Datos bd = new Base_Datos(context);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            ContentValues registro = new ContentValues();
+            registro.put("ID", carrito.getID());
+            registro.put("ID_Producto", carrito.getID_Producto());
+            registro.put("ID_Usuario", carrito.getID_Usuario());
+            registro.put("Cantidad", carrito.getCantidad());
+            db.insert(SQLITE.tablaCarrito, null, registro);
+            db.close();
+            return 1;
+        }
+        return 2;
+    }
+
+    public static ArrayList<Carrito> obtenerCarrito(Context contexto) {
+        Base_Datos base_datos = new Base_Datos(contexto);
+        SQLiteDatabase db = base_datos.getWritableDatabase();
+        if (db != null) {
+            ArrayList<Carrito> lista = new ArrayList<>();
+            Cursor c = db.rawQuery("select * from " + tablaCarrito + ";", null);
+            if (c.getCount() > 0) {
+                if (c.moveToFirst()) {
+                    do {
+                        lista.add(new Carrito(c.getInt(0),c.getInt(1),c.getInt(2),c.getInt(3)));
+                    } while (c.moveToNext());
+                }
+            }
+            return lista;
+        }
+        return null;
+    }
+
+    public static int EditarCarrito(Context context, Carrito carrito) {
+        Base_Datos bd = new Base_Datos(context);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            ContentValues registro = new ContentValues();
+            registro.put("ID_Producto", carrito.getID_Producto());
+            registro.put("ID_Usuario", carrito.getID_Usuario());
+            registro.put("Cantidad", carrito.getCantidad());
+            db.update(SQLITE.tablaCarrito, registro,"ID= '"+carrito.getID()+"'", null);
+            db.close();
+            return 1;
+        }
+        return 2;
+    }
+
+    public static int borrarCarrito(Context contexto, int id) {
+        Base_Datos bd = new Base_Datos(contexto);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            db.execSQL("DELETE FROM " + SQLITE.tablaCarrito + " WHERE ID =" + id + ";");
+            db.close();
+            return 1;
+        }
+        return 2;
+    }
+
+
+    public static int agregarPedido(Context context, Pedidos pedido) {
+        Base_Datos bd = new Base_Datos(context);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            ContentValues registro = new ContentValues();
+            registro.put("ID", pedido.getID());
+            registro.put("ID_Producto", pedido.getID_Producto());
+            registro.put("ID_Usuario", pedido.getID_Usuario());
+            registro.put("Cantidad", 0);
+            registro.put("PorPagar", pedido.getA_Pagar());
+            db.insert(SQLITE.tablaPedidos, null, registro);
+            db.close();
+            return 1;
+        }
+        return 2;
+    }public static int editarPedido(Context context, Pedidos pedido) {
+        Base_Datos bd = new Base_Datos(context);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            ContentValues registro = new ContentValues();
+            registro.put("ID_Producto", pedido.getID_Producto());
+            registro.put("ID_Usuario", pedido.getID_Usuario());
+            registro.put("Cantidad", 1);
+            registro.put("PorPagar", pedido.getA_Pagar());
+            db.update(SQLITE.tablaPedidos, registro,"ID= '"+pedido.getID()+"'", null);
+            db.close();
+            return 1;
+        }
+        return 2;
+    }
+
+    public static ArrayList<Pedidos> obtenerPedidos(Context contexto) {
+        Base_Datos base_datos = new Base_Datos(contexto);
+        SQLiteDatabase db = base_datos.getWritableDatabase();
+        if (db != null) {
+            ArrayList<Pedidos> lista = new ArrayList<>();
+            Cursor c = db.rawQuery("select * from " + tablaPedidos + ";", null);
+            if (c.getCount() > 0) {
+                if (c.moveToFirst()) {
+                    do {
+                        lista.add(new Pedidos(c.getInt(0),c.getInt(1),c.getInt(2),c.getInt(3),c.getInt(4)));
+                    } while (c.moveToNext());
+                }
+            }
+            return lista;
+        }
+        return null;
     }
 
 }

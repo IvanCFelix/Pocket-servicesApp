@@ -91,7 +91,6 @@
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="10dp"
                                 android:drawableTint="@color/colorPrimary"
-                                android:inputType="textCapWords|textPersonName"
                                 android:maxLength="30"
                                 android:textStyle="bold"
                                 android:paddingTop="15dp"
@@ -107,7 +106,7 @@
                             android:textAlignment="center"
                             android:textColorHint="#808080"
                             app:counterEnabled="true"
-                            app:counterMaxLength="50"
+                            app:counterMaxLength="250"
                             app:errorEnabled="true">
 
                             <EditText
@@ -116,8 +115,8 @@
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="10dp"
                                 android:drawableTint="@color/colorPrimary"
-                                android:inputType="textCapWords|textMultiLine"
-                                android:maxLength="50"
+                                android:inputType="textMultiLine"
+                                android:maxLength="250"
                                 android:textStyle="bold"
                                 android:paddingTop="15dp"
                                 android:textAlignment="textStart"

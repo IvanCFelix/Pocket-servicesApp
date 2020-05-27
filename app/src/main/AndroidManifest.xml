@@ -22,8 +22,10 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Agregar.Producto.Formulario_Producto"></activity>
-        <activity android:name=".Agregar.Productos.Agregar_Producto" />
+        <activity android:name=".Desplegar.Activity_Desplegar_Producto" />
+        <activity android:name=".Agregar.Producto.Formulario_Producto" />
+        <activity android:name=".Desplegar.Pedidos.Lista_Pedidos" />
+
         <activity
             android:name=".Menu_Vendedor"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -37,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Añadir.package.Usuario.Activity_Registrar_Usuario" />
+        <activity android:name=".Agregar.Usuario.Activity_Registrar_Usuario" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
