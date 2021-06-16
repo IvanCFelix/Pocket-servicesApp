@@ -3,6 +3,8 @@ package com.c_felix.pocketmarket.Utilidades;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
@@ -12,11 +14,15 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 
 import com.c_felix.pocketmarket.R;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Metodos_Estaticos {
     public static final int CODIGO_GALERIA_FOTO = 1;
@@ -99,12 +105,43 @@ public class Metodos_Estaticos {
             try {
                 File archivo_foto = crearFoto(activity);
                 if (archivo_foto != null) {
-                    Uri uri_foto = FileProvider.getUriForFile(context, "com.fragmentoestudio.agronodo", archivo_foto);
+                    Uri uri_foto = FileProvider.getUriForFile(context, "com.c_felix.pocketmarket", archivo_foto);
                     intentCamara.putExtra(MediaStore.EXTRA_OUTPUT, uri_foto);
                     activity.startActivityForResult(intentCamara, codigo);
                 }
             } catch (IOException ex) {
             }
         }
+    }
+
+    public static byte[] imagenArrayBytes(Bitmap imagen, String formato) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        if (formato.equals("png")) {
+            imagen.compress(Bitmap.CompressFormat.PNG, 30, bos);
+        } else {
+            imagen.compress(Bitmap.CompressFormat.JPEG, 30, bos);
+        }
+        return bos.toByteArray();
+    }
+
+    public static int obtenerValorMaximo(Context contexto, String tabla, String campo) {
+        Base_Datos bd = new Base_Datos(contexto);
+        SQLiteDatabase db = bd.getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("select MAX(" + campo + ") from " + tabla + " ;", null);
+            if (c.getCount() == 1) {
+                c.moveToFirst();
+                int valor = c.getInt(0);
+                db.close();
+                return valor;
+            }
+        }
+        return 1;
+    }
+
+    public static LatLngBounds obtenerCentroMapa(final LatLng coordenadas) {
+        final LatLngBounds.Builder centerBuilder = LatLngBounds.builder();
+            centerBuilder.include(coordenadas);
+        return centerBuilder.build();
     }
 }

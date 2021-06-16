@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.c_felix.pocketmarket" >
+    package="com.c_felix.pocketmarket">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +21,14 @@
         android:label="PocketMarket"
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".Desplegar.Pedidos.Mapa_Ubicacion_Pedido"></activity>
+        <activity android:name=".Desplegar.Activity_Desplegar_Producto" />
+        <activity android:name=".Agregar.Producto.Formulario_Producto" />
+        <activity android:name=".Desplegar.Pedidos.Lista_Pedidos" />
+        <activity
+            android:name=".Menu_Vendedor"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -31,9 +39,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Agregar.Usuario.Activity_Registrar_Usuario" />
 
-        <activity android:name=".Añadir.Usuario.Activity_Registrar_Usuario" >
-        </activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.c_felix.pocketmarket"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDXv6_aWaRLsuIV2VyHSrlNIpdkLCBboOc" />
     </application>
 
 </manifest>

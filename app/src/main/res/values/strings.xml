@@ -186,7 +186,7 @@
     <string name="no_hay_imagenes_ni_videos">No hay Imagenes y Videos Seleccionados</string>
     <string name="deseas_editar_tarea">¿Deseas editar esta tarea?</string>
     <string name="deseas_editar_ingeniero">¿Deseas editar este Ingeniero?</string>
-    <string name="deseas_eliminar_ingeniero">¿Deseas eliminar este Ingeniero?</string>
+    <string name="deseas_eliminar_producto">¿Deseas eliminar este producto?</string>
 
     <string name="videos">Obtener Vídeo</string>
     <string name="donde_desea_obtener_video">¿Desea desea obtener el vídeo?</string>

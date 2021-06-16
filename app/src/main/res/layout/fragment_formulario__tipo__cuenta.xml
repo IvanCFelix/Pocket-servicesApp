@@ -69,6 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/ty_NombreEmpresa"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -79,7 +80,7 @@
                         app:errorEnabled="true">
 
                         <EditText
-                            android:id="@+id/txt_NombreEmpresa"
+                            android:id="@+id/txt_nomEmpresa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_persona"
@@ -92,77 +93,6 @@
                             android:textStyle="bold" />
 
                     </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:hint="Calle"
-                        android:textColorHint="@color/colorBlue"
-                        app:counterEnabled="true"
-                        app:errorEnabled="true">
-
-                        <EditText
-                            android:id="@+id/txt_Calle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_casa"
-                            android:drawablePadding="10dp"
-                            android:drawableTint="@color/colorBlue"
-                            android:inputType="textPersonName|textCapSentences|textCapWords"
-
-                            android:textAlignment="textStart"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:hint="Colonia"
-                        android:textColorHint="@color/colorBlue"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="50"
-                        app:errorEnabled="true">
-
-                        <EditText
-                            android:id="@+id/txt_Colonia"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_casa"
-                            android:drawablePadding="10dp"
-                            android:drawableTint="@color/colorBlue"
-                            android:inputType="textPersonName|textCapSentences|textCapWords"
-                            android:maxLength="50"
-                            android:textAlignment="textStart"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                    </android.support.design.widget.TextInputLayout>
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:hint="# No. Exterior"
-                            android:textColorHint="@color/colorBlue"
-                            app:counterEnabled="true"
-                            app:counterMaxLength="50"
-                            app:errorEnabled="true">
-
-                            <EditText
-                                android:id="@+id/txt_numero"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="10dp"
-                                android:drawableTint="@color/colorBlue"
-                                android:inputType="textPersonName|textCapSentences|textCapWords"
-                                android:maxLength="50"
-                                android:textAlignment="textStart"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                        </android.support.design.widget.TextInputLayout>
 
                     </LinearLayout>
                 </LinearLayout>

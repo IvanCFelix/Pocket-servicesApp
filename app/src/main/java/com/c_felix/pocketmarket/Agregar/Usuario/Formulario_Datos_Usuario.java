@@ -1,8 +1,6 @@
-package com.c_felix.pocketmarket.Añadir.Usuario;
+package com.c_felix.pocketmarket.Agregar.Usuario;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,24 +10,21 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Formulario_Datos_Usuario extends Fragment {
     ImageView ivImagen;
     FloatingActionButton fabAgregarImagen;
-    EditText txtNombre, txt_Username, txtCorreo, txtTelefono;
+    EditText txtNombre, txt_Username, txtCorreo, txtTelefono,txt_password;
     Bitmap bmpImagen;
 
     public Formulario_Datos_Usuario() {
@@ -48,7 +43,7 @@ public class Formulario_Datos_Usuario extends Fragment {
         txtCorreo = view.findViewById(R.id.txt_Correo);
         txtTelefono = view.findViewById(R.id.txt_Telefono);
         txt_Username = view.findViewById(R.id.txt_Username);
-
+        txt_password = view.findViewById(R.id.txt_password);
 
         fabAgregarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
