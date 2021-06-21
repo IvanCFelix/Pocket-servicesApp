@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.c_felix.pocketmarket">
+    package="com.c_felix.pocketmarket" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -21,18 +21,18 @@
         android:label="PocketMarket"
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Desplegar.Pedidos.Mapa_Ubicacion_Pedido"></activity>
+        android:theme="@style/AppTheme" >
+
+        <activity android:name=".Desplegar.Pedidos.Mapa_Ubicacion_Pedido" />
         <activity android:name=".Desplegar.Activity_Desplegar_Producto" />
         <activity android:name=".Agregar.Producto.Formulario_Producto" />
-        <activity android:name=".Desplegar.Pedidos.Lista_Pedidos" />
         <activity
             android:name=".Menu_Vendedor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:theme="@style/AppTheme.FullScreen">
+            android:theme="@style/AppTheme.FullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +45,7 @@
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.c_felix.pocketmarket"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />

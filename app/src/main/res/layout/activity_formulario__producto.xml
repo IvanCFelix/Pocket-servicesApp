@@ -140,61 +140,13 @@
 
 
 
-                            <android.support.design.widget.TextInputLayout
-                                android:layout_marginTop="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColorHint="#808080"
-                                android:textAlignment="center"
-                                app:counterEnabled="true"
-                                android:visibility="visible"
-                                app:counterMaxLength="20"
-                                app:errorEnabled="true"
-                                android:hint="Cantidad disponible">
-
-                                <EditText
-                                    android:id="@+id/txt_stockProducto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textAlignment="textStart"
-                                    android:maxLength="20"
-                                    android:textStyle="bold"
-                                    android:drawableTint="@color/colorPrimary"
-                                    android:drawablePadding="5dp"
-                                    android:inputType="number"
-                                    android:textSize="18sp"
-                                    android:paddingTop="15dp"/>
-                            </android.support.design.widget.TextInputLayout>
 
 
 
 
                         </LinearLayout>
 
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Precio por unidad"
-                            android:textAlignment="center"
-                            android:textColorHint="#808080"
-                            android:layout_marginBottom="10dp"
-                            app:counterEnabled="true"
-                            app:counterMaxLength="50"
-                            app:errorEnabled="true">
-
-                            <EditText
-                                android:id="@+id/txt_precioProducto"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="15dp"
-                                android:drawableTint="@color/colorPrimary"
-                                android:inputType="numberDecimal"
-                                android:maxLength="50"
-                                android:paddingTop="15dp"
-                                android:textStyle="bold|italic"
-                                android:textAlignment="textStart"
-                                android:textSize="18sp" />
-                        </android.support.design.widget.TextInputLayout>
+                      
                         <Spinner
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

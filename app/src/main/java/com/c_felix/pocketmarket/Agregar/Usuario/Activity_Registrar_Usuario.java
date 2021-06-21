@@ -10,16 +10,25 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.c_felix.pocketmarket.Adaptadores.SlideViewPager;
 import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,9 +40,10 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
     SlideViewPager adaptador;
     FloatingActionButton fabSiguiente, fabAtras;
     Formulario_Datos_Usuario formulario_datos_usuario = new Formulario_Datos_Usuario();
-    Formulario_Tipo_Cuenta formulario_tipo_cuenta = new Formulario_Tipo_Cuenta();
-    Mapa_Ubicacion_Usuario mapa_ubicacion_usuario = new Mapa_Ubicacion_Usuario();
+
     List<Fragment> lista = new ArrayList<>();
+    private RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +51,11 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cerrar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Agregar Usuario");
+        setTitle("Registrarse");
         fabSiguiente = findViewById(R.id.fab_siguiente);
         fabAtras = findViewById(R.id.fab_atras);
+        queue = Volley.newRequestQueue(this);
 
-        lista.add(formulario_tipo_cuenta);
-        lista.add(mapa_ubicacion_usuario);
         lista.add(formulario_datos_usuario);
 
         paginas = findViewById(R.id.vpIntro);
@@ -60,108 +69,41 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
                     paginas.setCurrentItem(0);
 
 
-                }else if(paginas.getCurrentItem()==2){
+                } else if (paginas.getCurrentItem() == 2) {
                     paginas.setCurrentItem(1);
 
                 }
             }
         });
 
+
         fabSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (paginas.getCurrentItem() == 0 ) {
-                    if(formulario_tipo_cuenta.spn_tipoCuenta.getSelectedItemPosition()==0 || (formulario_tipo_cuenta.spn_tipoCuenta.getSelectedItemPosition()==1 && formulario_tipo_cuenta.txt_empresa.getText().equals(""))){
-                        Toast.makeText(Activity_Registrar_Usuario.this, "Complete los datos", Toast.LENGTH_SHORT).show();
-                    }else{
-                        paginas.setCurrentItem(1);
-                        Toast.makeText(Activity_Registrar_Usuario.this, "Seleccione su ubicacion", Toast.LENGTH_SHORT).show();
-
-
+                if (formulario_datos_usuario.txt_adress.getText() == null || formulario_datos_usuario.txtCorreo.getText() == null || formulario_datos_usuario.txtNombre.getText() == null
+                        || formulario_datos_usuario.bmpImagen == null || formulario_datos_usuario.genero == 0) {
+                    Toast.makeText(Activity_Registrar_Usuario.this, "Revise que todos los datos esten llenos", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        JSONObject user = new JSONObject();
+                        user.put("fullName", formulario_datos_usuario.txtNombre.getText().toString());
+                        user.put("address", formulario_datos_usuario.txt_adress.getText().toString());
+                        user.put("age", formulario_datos_usuario.txt_age.getText().toString());
+                        user.put("gender", formulario_datos_usuario.genero - 1);
+                        user.put("image", Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen));
+                        user.put("password", formulario_datos_usuario.txt_password);
+                        addUser(user);
+                    } catch (Exception e) {
+                        Log.e("TAG", "onClick: ", e);
                     }
-                }else if(paginas.getCurrentItem()==1){
-                    if(mapa_ubicacion_usuario.coordenadas==null){
-                        Toast.makeText(Activity_Registrar_Usuario.this, "Seleccione su ubicacion", Toast.LENGTH_SHORT).show();
 
-                    }else{
-                        paginas.setCurrentItem(2);
-
-
-                    }
-                }
-                else{
-                    if(formulario_datos_usuario.txt_Username.getText() == null|| formulario_datos_usuario.txtCorreo.getText() == null || formulario_datos_usuario.txtNombre.getText() == null
-                   ||formulario_datos_usuario.txtTelefono.getText()==null||formulario_datos_usuario.bmpImagen==null ){
-                        Toast.makeText(Activity_Registrar_Usuario.this, "Revise que todos los datos esten llenos", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Usuarios usuario = new Usuarios();
-                        usuario.setID(SQLITE.obtenerValorMaximo(Activity_Registrar_Usuario.this,SQLITE.tablaUsuarios,"ID")+1);
-                        usuario.setNombre(formulario_datos_usuario.txtNombre.getText().toString());
-                        usuario.setNombreEmpresa(formulario_tipo_cuenta.txt_empresa.getText().toString());
-                        usuario.setUsername(formulario_datos_usuario.txt_Username.getText().toString());
-                        usuario.setCorreo(formulario_datos_usuario.txtCorreo.getText().toString());
-                        usuario.setContraseña(formulario_datos_usuario.txt_password.getText().toString());
-                        usuario.setTipoUsuario(formulario_tipo_cuenta.spn_tipoCuenta.getSelectedItem().toString());
-                        usuario.setNumeroTel(formulario_datos_usuario.txtTelefono.getText().toString());
-                        JSONObject ubicacion = new JSONObject();
-                        try {
-                            ubicacion.put("Lat",mapa_ubicacion_usuario.coordenadas.latitude);
-                            ubicacion.put("Lng", mapa_ubicacion_usuario.coordenadas.longitude);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        usuario.setUbicacion(ubicacion.toString());
-                        usuario.setImagen(formulario_datos_usuario.bmpImagen);
-
-                        try {
-                            SQLITE.agregarUsuario(Activity_Registrar_Usuario.this, usuario, "jpg");
-                            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Activity_Registrar_Usuario.this);
-                            dialogo1.setCancelable(false);
-                            dialogo1.setMessage("Usuario registrado exitosamente");
-                            dialogo1.setPositiveButton(getString(R.string.enterado), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo1, int id) {
-                                    finish();
-                                }
-                            });
-                            dialogo1.show();
-                        }catch ( Exception e){
-                            Toast.makeText(Activity_Registrar_Usuario.this, e + "", Toast.LENGTH_SHORT).show();
-                        }
-                    }
 
                 }
             }
         });
 
-        paginas.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
 
-            }
-
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onPageSelected(int i) {
-                if (i == 0) {
-                    fabSiguiente.setImageResource((R.drawable.ic_siguiente));
-                    fabAtras.setVisibility(View.GONE);
-                } else if( i ==1){
-                    fabSiguiente.setImageResource((R.drawable.ic_siguiente));
-                    fabAtras.setVisibility(View.VISIBLE);
-                }
-                else {
-                    fabSiguiente.setImageResource((R.drawable.ic_finalizar));
-                    fabAtras.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
     }
 
     @Override
@@ -183,6 +125,26 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
             }
         }
     }
+
+    private void addUser(JSONObject user) {
+        System.out.println("Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd");
+        String url = "https://20fea47e97ae.ngrok.io/api/pocketService/user";
+        JsonObjectRequest request = new JsonObjectRequest
+                (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        System.out.println("response"+response.toString());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.toString());
+                    }
+                });
+        queue.add(request);
+
     }
+}
 
 

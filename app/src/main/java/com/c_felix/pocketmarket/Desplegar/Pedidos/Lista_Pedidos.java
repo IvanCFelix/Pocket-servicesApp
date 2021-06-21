@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.c_felix.pocketmarket.Adaptadores.Desplegar_Pedidos_Adaptador;
 import com.c_felix.pocketmarket.Adaptadores.Lista_Carrito_Producto_Adapter;
+import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Producto;
 import com.c_felix.pocketmarket.Clases.Carrito;
 import com.c_felix.pocketmarket.Clases.Pedidos;
 import com.c_felix.pocketmarket.Clases.Productos;
@@ -32,7 +33,7 @@ public class Lista_Pedidos extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     Desplegar_Pedidos_Adaptador adapter;
     TextView txtNoHay;
-    Button ordenar;
+    Button btnAddListing;
 
     ArrayList<Carrito> carrito = new ArrayList<>();
     ArrayList<Productos> productos = new ArrayList<>();
@@ -50,9 +51,16 @@ public class Lista_Pedidos extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        btnAddListing = view.findViewById(R.id.btnAddListing);
         llenarLista();
         getActivity().setTitle("Pedidos");
 
+        btnAddListing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Formulario_Producto.class));
+            }
+        });
 
         return  view;
     }

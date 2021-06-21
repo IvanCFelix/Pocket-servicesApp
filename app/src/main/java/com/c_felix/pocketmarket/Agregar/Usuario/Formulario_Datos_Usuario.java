@@ -13,24 +13,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Formulario_Datos_Usuario extends Fragment {
     ImageView ivImagen;
     FloatingActionButton fabAgregarImagen;
-    EditText txtNombre, txt_Username, txtCorreo, txtTelefono,txt_password;
+    EditText txtNombre, txt_adress, txtCorreo,txt_password,txt_age;
     Bitmap bmpImagen;
+    Spinner spn_genere;
 
+    int genero;
     public Formulario_Datos_Usuario() {
         // Required empty public constructor
     }
-
+    String[] geners = {"Seleccione su genero","Masculino","Femenino",".Otro"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,10 +48,25 @@ public class Formulario_Datos_Usuario extends Fragment {
         fabAgregarImagen = view.findViewById(R.id.fab_agregar_imagen);
         txtNombre = view.findViewById(R.id.txt_Nombre);
         txtCorreo = view.findViewById(R.id.txt_Correo);
-        txtTelefono = view.findViewById(R.id.txt_Telefono);
-        txt_Username = view.findViewById(R.id.txt_Username);
+        spn_genere = view.findViewById(R.id.spn_genere);
+        txt_adress = view.findViewById(R.id.txt_adress);
         txt_password = view.findViewById(R.id.txt_password);
+        txt_age = view.findViewById(R.id.txt_age);
 
+        spn_genere.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item,geners));
+
+        spn_genere.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                genero = i;
+                System.out.println(genero);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         fabAgregarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

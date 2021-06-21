@@ -51,12 +51,11 @@ public class Mi_Usuario extends Fragment {
 
         getActivity().setTitle(" " + getString(R.string.mi_usuario));
 
-        usuarioActivo = SQLITE.obtenerUsuarioActivo(getContext());
-        usuario = SQLITE.obtenerUsuario(getContext(),usuarioActivo.get(0).getID());
+
         Bitmap imagen = SQLITE.obtenerImagen(getContext(),usuario.getID());
-        txtNombre.setText(usuario.getNombre().trim());
-        txtCorreo.setText(usuario.getCorreo());
-        civPerfil.setImageBitmap(imagen);
+        txtNombre.setText("Ejemplo");
+        txtCorreo.setText("Data");
+        civPerfil.setImageBitmap(null);
 
         return  view;
     }

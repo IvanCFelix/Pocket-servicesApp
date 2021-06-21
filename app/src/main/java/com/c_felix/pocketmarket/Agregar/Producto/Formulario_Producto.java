@@ -46,7 +46,7 @@ public class Formulario_Producto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario__producto);
 
-        setTitle("Agregar un producto");
+        setTitle("Crear trabajo");
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cerrar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);

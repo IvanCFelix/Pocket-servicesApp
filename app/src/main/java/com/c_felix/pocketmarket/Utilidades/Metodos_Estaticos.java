@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Base64;
 
 import com.c_felix.pocketmarket.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -143,5 +144,13 @@ public class Metodos_Estaticos {
         final LatLngBounds.Builder centerBuilder = LatLngBounds.builder();
             centerBuilder.include(coordenadas);
         return centerBuilder.build();
+    }
+
+    public static String convertToBase64(Bitmap bitmap)
+    {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+        return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }
 }

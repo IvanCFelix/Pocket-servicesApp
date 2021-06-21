@@ -43,7 +43,6 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
     Lista_Pedidos lista_pedidos = new Lista_Pedidos();
     public static CircleImageView imagenPerfil;
     public static TextView txtNombre, txtCorreo;
-    int ID_Usuario;
     ArrayList<UsuarioActivo> usuarioActivos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ID_Usuario = getIntent().getIntExtra("Usuario", 0);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -80,11 +78,11 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
         txtCorreo = headerView.findViewById(R.id.navheader_Correo);
 
         usuarioActivos = SQLITE.obtenerUsuarioActivo(Menu_Vendedor.this);
-        Usuarios usuarios = SQLITE.obtenerUsuario(Menu_Vendedor.this, usuarioActivos.get(0).getID());
-        Bitmap imagen = SQLITE.obtenerImagen(Menu_Vendedor.this, usuarios.getID());
-        imagenPerfil.setImageBitmap(imagen);
-        txtNombre.setText(usuarios.getNombre());
-        txtCorreo.setText(usuarios.getCorreo());
+
+
+        imagenPerfil.setImageBitmap(null);
+        txtNombre.setText("Panchito");
+        txtCorreo.setText("demo-bloque@hotmai.com");
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -109,16 +107,7 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
                     getSupportActionBar().setIcon(icono);
                 } catch (Exception e) {
                 }
-                break;
-            case R.id.nav_Lista_Productos:
-                try {
-                    fragmentTransaction.replace(R.id.area_ventana, lista_productos);
-                    drawer.closeDrawer(GravityCompat.START);
-                    Drawable icono = getResources().getDrawable(R.drawable.ic_productos);
-                    icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-                    getSupportActionBar().setIcon(icono);
-                } catch (Exception e) {
-                }
+
                 break;
             case R.id.nav_pedidos:
                 try {
@@ -129,18 +118,7 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
                     getSupportActionBar().setIcon(icono);                } catch (Exception e) {
                 }
                 break;
-            case R.id.nav_Carrito:
-                try {
-                    fragmentTransaction.replace(R.id.area_ventana, lista_carrito);
-                    drawer.closeDrawer(GravityCompat.START);
-                    Drawable icono = getResources().getDrawable(R.drawable.ic_carrito_compras);
-                    setTitle("Carrito");
-                    icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-                    getSupportActionBar().setIcon(icono);
-                } catch (Exception e) {
-                }
-                break;
-            case R.id.nav_Mi_Usuario:
+                case R.id.nav_Mi_Usuario:
                 try {
                   fragmentTransaction.replace(R.id.area_ventana, mi_usuario);
                     drawer.closeDrawer(GravityCompat.START);

@@ -6,15 +6,23 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.c_felix.pocketmarket.Agregar.Usuario.Activity_Registrar_Usuario;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
-import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,6 +32,8 @@ public class Login extends AppCompatActivity {
     public static final int MULTIPLE_PERMISSIONS_REQUEST_CODE = 3;
     public static final String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     ArrayList<UsuarioActivo> activo;
+
+    private RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +42,7 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.btnIniciarSesion);
         username =findViewById(R.id.txt_Login_Usuario);
         password=findViewById(R.id.txt_Login_Contraseña);
-
+        queue = Volley.newRequestQueue(this);
         PedirPermisos();
         activo = SQLITE.obtenerUsuarioActivo(Login.this);
         if(activo.size()!=0){
@@ -42,22 +52,31 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Usuarios usuario = SQLITE.obtenerUsuarioUsername(Login.this,username.getText().toString());
-                if(usuario==null){
-                    Toast.makeText(Login.this, "Nombre de usuario incorrecto", Toast.LENGTH_SHORT).show();
-                }else{
-                    if(password.getText().toString().equals(usuario.getContraseña())){
-                        startActivity(new Intent(Login.this, Menu_Vendedor.class).putExtra("Usuario",usuario.getID()));
-                        UsuarioActivo usuarioActivo = new UsuarioActivo();
-                        usuarioActivo.setID(usuario.getID());
-                        usuarioActivo.setUsername(usuario.getUsername());
-                        SQLITE.usuarioActivo(Login.this,usuarioActivo);
-                        finish();
-                    }else{
-                        Toast.makeText(Login.this, "Contraseña incorrecta   ", Toast.LENGTH_SHORT).show();
+                JSONObject credentials = new JSONObject();
+                try {
+                    credentials.put("email", username.getText().toString());
+                    credentials.put("password",password.getText().toString());
+                    System.out.println("jsonString: "+credentials.toString());
+                    String url = "https://20fea47e97ae.ngrok.io/api/pocketService/login";
+                    JsonObjectRequest request = new JsonObjectRequest
+                            (Request.Method.POST, url, credentials, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    System.out.println("response"+response.toString());
+                                }
+                            }, new Response.ErrorListener() {
 
-                    }
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    System.out.println(error.toString());
+                                }
+                            });
+                    queue.add(request);
+                    startActivity(new Intent(Login.this, Menu_Vendedor.class));
+                }catch (JSONException e){
+                    Log.e("TAG", "onClick: ",  e);
                 }
+
             }
         });
 
@@ -68,6 +87,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
 
     public void PedirPermisos() {
         if (ActivityCompat.checkSelfPermission(this, permissions[0]) != PackageManager.PERMISSION_GRANTED ||
