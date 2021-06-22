@@ -89,7 +89,7 @@ public class Lista_Pedidos extends Fragment {
     private void llenarLista() {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                try {
+             /*   try {
                     carrito = SQLITE.obtenerCarrito(getContext());
                     if(productos.size()==0){
                         productos.add(SQLITE.obtenerProducto(getContext(),carrito.get(0).getID_Producto()));
@@ -102,7 +102,7 @@ public class Lista_Pedidos extends Fragment {
                         txtNoHay.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
-                }
+                }*/
 
             }
         });

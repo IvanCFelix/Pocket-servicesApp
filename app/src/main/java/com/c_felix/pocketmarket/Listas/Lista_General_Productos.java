@@ -82,7 +82,7 @@ public class Lista_General_Productos extends Fragment {
     private void llenarLista() {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                try {
+             /*   try {
                     ArrayList<Productos> productos= SQLITE.obtenerProductos(getContext());
                     adapter = new Lista_Comprar_Producto_Adaptador(productos, getContext(), recyclerView, txtNoHay);
                     recyclerView.setAdapter(adapter);
@@ -92,7 +92,7 @@ public class Lista_General_Productos extends Fragment {
                         txtNoHay.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
-                }
+                }*/
 
             }
         });

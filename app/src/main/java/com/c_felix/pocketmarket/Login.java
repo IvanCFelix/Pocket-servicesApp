@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.c_felix.pocketmarket.Agregar.Usuario.Activity_Registrar_Usuario;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
+import com.c_felix.pocketmarket.Utilidades.Uris;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,7 @@ public class Login extends AppCompatActivity {
         PedirPermisos();
         activo = SQLITE.obtenerUsuarioActivo(Login.this);
         if(activo.size()!=0){
-            startActivity(new Intent(Login.this, Menu_Vendedor.class).putExtra("Usuario",activo.get(0).getID()));
+            startActivity(new Intent(Login.this, Menu_Vendedor.class));
             finish();
         }
         login.setOnClickListener(new View.OnClickListener() {
@@ -57,22 +58,38 @@ public class Login extends AppCompatActivity {
                     credentials.put("email", username.getText().toString());
                     credentials.put("password",password.getText().toString());
                     System.out.println("jsonString: "+credentials.toString());
-                    String url = "https://20fea47e97ae.ngrok.io/api/pocketService/login";
+                    String url = Uris.API_ENDPOINT+"/login";
                     JsonObjectRequest request = new JsonObjectRequest
                             (Request.Method.POST, url, credentials, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    System.out.println("response"+response.toString());
+                                    try{
+                                        if(response.getJSONObject("user").get("id") != null){
+                                            try{
+                                                UsuarioActivo user = new UsuarioActivo(response.getJSONObject("user").toString(),response.getString("token"));
+                                                System.out.println(user.toString());
+                                                SQLITE.agregarUsuarioActivo(Login.this,user);
+                                                activo = SQLITE.obtenerUsuarioActivo(Login.this);
+
+                                            }catch (Error error){
+                                                System.out.println("Error"+error);
+                                            }
+
+                                            startActivity(new Intent(Login.this, Menu_Vendedor.class));
+
+                                        }
+                                    }catch (JSONException error){
+                                        Log.println(1, "Json error ",error.toString());
+                                    }
                                 }
                             }, new Response.ErrorListener() {
-
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     System.out.println(error.toString());
                                 }
                             });
                     queue.add(request);
-                    startActivity(new Intent(Login.this, Menu_Vendedor.class));
+
                 }catch (JSONException e){
                     Log.e("TAG", "onClick: ",  e);
                 }

@@ -1,30 +1,30 @@
 package com.c_felix.pocketmarket.Clases;
 
 public class UsuarioActivo {
-    String username;
-    int ID;
+    String user;
+    String token;
 
-    public UsuarioActivo(int ID,String username) {
-        this.username = username;
-        this.ID = ID;
+    public UsuarioActivo(String user, String token) {
+        this.user = user;
+        this.token = token;
     }
 
     public UsuarioActivo() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public int getID() {
-        return ID;
+    public String getToken() {
+        return token;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

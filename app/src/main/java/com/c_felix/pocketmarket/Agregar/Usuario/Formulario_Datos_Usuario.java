@@ -37,7 +37,7 @@ public class Formulario_Datos_Usuario extends Fragment {
     public Formulario_Datos_Usuario() {
         // Required empty public constructor
     }
-    String[] geners = {"Seleccione su genero","Masculino","Femenino",".Otro"};
+    String[] geners = {"Seleccione su genero","Femenino","Masculino",".Otro"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +59,7 @@ public class Formulario_Datos_Usuario extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 genero = i;
-                System.out.println(genero);
+
             }
 
             @Override

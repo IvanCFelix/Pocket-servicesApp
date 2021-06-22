@@ -61,8 +61,7 @@ public class Formulario_Producto extends AppCompatActivity {
         categoria = findViewById(R.id.spn_categoria_producto);
         titulo = findViewById(R.id.txt_titulo_producto);
         descripcion = findViewById(R.id.txt_descripcion_producto);
-        precio = findViewById(R.id.txt_precioProducto);
-        cantidad_disp = findViewById(R.id.txt_stockProducto);
+
         usuarioActivos = SQLITE.obtenerUsuarioActivo(Formulario_Producto.this);
         ArrayList<String> tipoUnidades = new ArrayList<>();
 
@@ -110,8 +109,7 @@ public class Formulario_Producto extends AppCompatActivity {
                     Toast.makeText(Formulario_Producto.this, "Complete los datos correctamente", Toast.LENGTH_SHORT).show();
                 }else{
                     Productos producto = new Productos();
-                    producto.setID(Metodos_Estaticos.obtenerValorMaximo(Formulario_Producto.this, SQLITE.tablaProductos,"ID")+1);
-                    producto.setID_usuario(usuarioActivos.get(0).getID());
+                    producto.setID_usuario(2);
                     producto.setTitulo(titulo.getText().toString().trim());
                     producto.setDescripcion(descripcion.getText().toString().trim());
                     producto.setUnidadMedida(tipoUnidad.getSelectedItem().toString());
@@ -119,7 +117,6 @@ public class Formulario_Producto extends AppCompatActivity {
                     producto.setInventario(Integer.parseInt(cantidad_disp.getText().toString()));
                     producto.setPrecioUnidad(Double.parseDouble(precio.getText().toString()));
                     producto.setImagen(bmpImagen);
-                    SQLITE.agregarProducto(Formulario_Producto.this,producto,"jpg");
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Formulario_Producto.this);
                     dialogo1.setCancelable(false);
                     dialogo1.setMessage("Producto registrado exitosamente");

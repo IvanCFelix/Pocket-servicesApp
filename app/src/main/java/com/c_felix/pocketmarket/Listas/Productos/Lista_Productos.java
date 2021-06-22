@@ -90,10 +90,9 @@ public class Lista_Productos extends Fragment {
     private void llenarLista() {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                try {
+           /*     try {
                     ArrayList<UsuarioActivo> usuarioActivo = SQLITE.obtenerUsuarioActivo(getContext());
-                    Usuarios usuario = SQLITE.obtenerUsuarioUsername(getContext(),usuarioActivo.get(0).getUsername());
-                    ArrayList<Productos> productos= SQLITE.obtenerProductosUser(getContext(),usuario.getID());
+
                     adapter = new Lista_Seleccionar_Producto_Adaptador(productos, getContext(), recyclerView, txtNoHay);
                     recyclerView.setAdapter(adapter);
                     if (productos.isEmpty() || productos == null) {
@@ -103,7 +102,7 @@ public class Lista_Productos extends Fragment {
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), e+"", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
             }
         });

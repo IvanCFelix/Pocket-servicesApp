@@ -27,6 +27,7 @@ import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
+import com.c_felix.pocketmarket.Utilidades.Uris;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,12 +88,17 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
                 } else {
                     try {
                         JSONObject user = new JSONObject();
+                        String imagen = "data:image/jpeg;base64,"+ Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen);
                         user.put("fullName", formulario_datos_usuario.txtNombre.getText().toString());
+                        user.put("email", formulario_datos_usuario.txtCorreo.getText().toString());
+                        user.put("password", formulario_datos_usuario.txt_password.getText().toString());
                         user.put("address", formulario_datos_usuario.txt_adress.getText().toString());
-                        user.put("age", formulario_datos_usuario.txt_age.getText().toString());
+                        user.put("age", Integer.parseInt(formulario_datos_usuario.txt_age.getText().toString()));
                         user.put("gender", formulario_datos_usuario.genero - 1);
-                        user.put("image", Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen));
-                        user.put("password", formulario_datos_usuario.txt_password);
+                        user.put("image", imagen);
+                        user.put("roleId",3);
+                        System.out.println(user.get("image"));
+
                         addUser(user);
                     } catch (Exception e) {
                         Log.e("TAG", "onClick: ", e);
@@ -127,13 +133,15 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
     }
 
     private void addUser(JSONObject user) {
-        System.out.println("Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd Matarile lieasdasdajsdanjsdnasjdnasd");
-        String url = "https://20fea47e97ae.ngrok.io/api/pocketService/user";
+        String url = Uris.API_ENDPOINT+"/user";
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("response"+response.toString());
+                        System.out.println(response);
+                        Toast.makeText(Activity_Registrar_Usuario.this,
+                                "Se registro correctamente", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 }, new Response.ErrorListener() {
 

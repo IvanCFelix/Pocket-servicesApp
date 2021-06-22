@@ -52,8 +52,7 @@ public class Lista_Carrito_Producto_Adapter extends RecyclerView.Adapter<Lista_C
         holder.txtNombre.setText(productos.getTitulo());
         holder.ivFoto.setImageBitmap(productos.getImagen());
         holder.txt_Precio.setText("Precio: $"+productos.getPrecioUnidad());
-        final ArrayList<Carrito> carrito = SQLITE.obtenerCarrito(context);
-        holder.rv_borrar.setOnClickListener(new View.OnClickListener() {
+      /*  holder.rv_borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context);
@@ -78,7 +77,7 @@ public class Lista_Carrito_Producto_Adapter extends RecyclerView.Adapter<Lista_C
                 });
                 dialogo1.show();
             }
-        });
+        });*/
     }
 
     @Override

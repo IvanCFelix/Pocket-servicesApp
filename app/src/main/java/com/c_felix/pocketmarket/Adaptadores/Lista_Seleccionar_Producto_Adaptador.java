@@ -78,9 +78,7 @@ public class Lista_Seleccionar_Producto_Adaptador extends RecyclerView.Adapter<L
                 dialogo1.setPositiveButton(context.getString(R.string.eliminar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
 
-                         SQLITE.borrarProducto(context,productos.getID());
-
-                        ArrayList<Productos> productos = SQLITE.obtenerProductos(context);
+                        ArrayList<Productos> productos = null;
                         if(productos.isEmpty()){
                             txtNoHay.setVisibility(View.VISIBLE);
                         }else{

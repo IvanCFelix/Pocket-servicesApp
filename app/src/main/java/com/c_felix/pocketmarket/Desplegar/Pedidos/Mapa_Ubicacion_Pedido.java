@@ -46,9 +46,7 @@ public class Mapa_Ubicacion_Pedido extends AppCompatActivity implements OnMapRea
         mapView.onCreate(null);
         mapView.getMapAsync(this);
         mapView.onResume();
-        carritos = SQLITE.obtenerCarrito(Mapa_Ubicacion_Pedido.this);
 
-        usuario= SQLITE.obtenerUsuario(Mapa_Ubicacion_Pedido.this,carritos.get(0).getID_Producto());
         informacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -64,18 +64,15 @@ public class Lista_Carrito extends Fragment {
             @Override
             public void onClick(View view) {
                 Pedidos pedido = new Pedidos();
-                pedido.setID(Metodos_Estaticos.obtenerValorMaximo(getContext(),SQLITE.tablaPedidos,"ID")+1);
                 pedido.setID_Producto(productos.get(0).getID());
                 pedido.setID_Usuario(carrito.get(0).getID_Usuario());
                 pedido.setCantidad(carrito.get(0).getCantidad());
                 pedido.setA_Pagar(Double.parseDouble(total.getText().toString()));
-                SQLITE.agregarPedido(getContext(),pedido);
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
                 dialogo1.setCancelable(false);
                 dialogo1.setMessage("Producto registrado exitosamente");
                 dialogo1.setPositiveButton(getString(R.string.enterado), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        SQLITE.borrarCarrito(getContext(),carrito.get(0).getID());
                         startActivity(new Intent(getContext(), Menu_Vendedor.class));
                     }
                 });
@@ -109,7 +106,7 @@ public class Lista_Carrito extends Fragment {
     private void llenarLista() {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                try {
+              /*  try {
                     carrito = SQLITE.obtenerCarrito(getContext());
                     if(productos.size()==0){
                         productos.add(SQLITE.obtenerProducto(getContext(),carrito.get(0).getID_Producto()));
@@ -122,7 +119,7 @@ public class Lista_Carrito extends Fragment {
                         txtNoHay.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
-                }
+                }*/
 
             }
         });
@@ -131,7 +128,6 @@ public class Lista_Carrito extends Fragment {
     public void calcularTotal(){
         if(carrito.size()!=0){
             ArrayList<Productos> productos = new ArrayList<>();
-            productos.add(SQLITE.obtenerProducto(getContext(),carrito.get(0).getID_Producto()));
             int cantidad = carrito.get(0).getCantidad();
             double precio= productos.get(0).getPrecioUnidad();
             total.setText(String.valueOf(cantidad*precio));
