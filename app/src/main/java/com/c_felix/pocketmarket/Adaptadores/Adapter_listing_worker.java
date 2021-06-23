@@ -1,36 +1,28 @@
 package com.c_felix.pocketmarket.Adaptadores;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.c_felix.pocketmarket.Clases.Carrito;
-import com.c_felix.pocketmarket.Clases.Productos;
-import com.c_felix.pocketmarket.Listas.Carrito.Lista_Carrito;
 import com.c_felix.pocketmarket.R;
-import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Lista_Carrito_Producto_Adapter extends RecyclerView.Adapter<Lista_Carrito_Producto_Adapter.ViewHolder> {
+public class Adapter_listing_worker extends RecyclerView.Adapter<Adapter_listing_worker.ViewHolder> {
 
-    ArrayList<Productos> productos_source, productos_filtrados;
+    JSONArray productos_source, productos_filtrados;
     Context context;
     RecyclerView rvEncabezado;
     TextView txtNoHay;
-   public   double total_Pagar;
-    public Lista_Carrito_Producto_Adapter(ArrayList<Productos> lista, Context context, RecyclerView rv, TextView txtNoHay) {
+    public Adapter_listing_worker(JSONArray lista, Context context, RecyclerView rv, TextView txtNoHay) {
         this.productos_source = lista;
         this.productos_filtrados = lista;
         this.context = context;
@@ -47,11 +39,17 @@ public class Lista_Carrito_Producto_Adapter extends RecyclerView.Adapter<Lista_C
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        final Productos productos = productos_filtrados.get(position);
+        try{
+            final JSONObject productos = productos_filtrados.getJSONObject(position);
+            JSONObject producto1 = new JSONObject();
+
+        }catch (JSONException error){
+        }
+
         if(position==0) holder.divisor.setVisibility(View.GONE);
-        holder.txtNombre.setText(productos.getTitulo());
-        holder.ivFoto.setImageBitmap(productos.getImagen());
-        holder.txt_Precio.setText("Precio: $"+productos.getPrecioUnidad());
+        //holder.txtNombre.setText("Nambe");
+        //holder.ivFoto.setImageBitmap(productos.getImagen());
+        //holder.txt_Precio.setText("Precio: $"+productos.getPrecioUnidad());
       /*  holder.rv_borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +80,7 @@ public class Lista_Carrito_Producto_Adapter extends RecyclerView.Adapter<Lista_C
 
     @Override
     public int getItemCount() {
-        return productos_filtrados.size();
+        return productos_filtrados.length();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

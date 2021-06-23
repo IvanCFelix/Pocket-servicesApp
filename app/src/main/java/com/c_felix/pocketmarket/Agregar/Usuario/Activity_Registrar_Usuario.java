@@ -95,7 +95,7 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
                         user.put("address", formulario_datos_usuario.txt_adress.getText().toString());
                         user.put("age", Integer.parseInt(formulario_datos_usuario.txt_age.getText().toString()));
                         user.put("gender", formulario_datos_usuario.genero - 1);
-                        user.put("image", imagen);
+                        user.put("image", Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen));
                         user.put("roleId",3);
                         System.out.println(user.get("image"));
 

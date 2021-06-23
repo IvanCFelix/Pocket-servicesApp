@@ -71,10 +71,9 @@ public class SQLITE {
         SQLiteDatabase db = bd.getWritableDatabase();
         if (db != null) {
             ContentValues registro = new ContentValues();
-            registro.put("Token", usuario.getToken());
             registro.put("User", usuario.getUser());
+            registro.put("Token", usuario.getToken());
             db.insert(SQLITE.tablaUsuarioActivo, null, registro);
-            System.out.println("Se ejecuto ");
             db.close();
             return 1;
         }
@@ -121,7 +120,7 @@ public class SQLITE {
     public static void limpiarTabla(Context contexto, String tabla) {
         Base_Datos bd = new Base_Datos(contexto);
         SQLiteDatabase db = bd.getWritableDatabase();
-        db.execSQL("delete * from " + tabla + ";");
+        db.execSQL("delete  from " + tabla + ";");
         db.close();
     }
 

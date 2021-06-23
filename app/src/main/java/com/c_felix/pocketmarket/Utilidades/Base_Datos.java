@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 public class Base_Datos extends SQLiteOpenHelper {
     public static final String nombreBaseDatos = "PocketMarket";
-    public static final int Version = 14;
+    public static final int Version = 15;
     Context context;
 
 
@@ -26,15 +26,13 @@ public class Base_Datos extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaUsuarioActivo + "(Token Text, User text );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + SQLITE.tablaUsuarioActivo + "(User Text, Token text );");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + SQLITE.tablaUsuarioActivo);
-
-
         SharedPreferences pref = context.getSharedPreferences("intro", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();

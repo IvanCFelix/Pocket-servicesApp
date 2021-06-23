@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Producto;
+import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Jobs;
 import com.c_felix.pocketmarket.Clases.Carrito;
 import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;

@@ -1,34 +1,22 @@
 package com.c_felix.pocketmarket.Listas;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.c_felix.pocketmarket.Adaptadores.Lista_Comprar_Producto_Adaptador;
-import com.c_felix.pocketmarket.Adaptadores.Lista_Seleccionar_Producto_Adaptador;
-import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Producto;
-import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.R;
-import com.c_felix.pocketmarket.Utilidades.SQLITE;
-
-import java.util.ArrayList;
 
 public class Lista_General_Productos extends Fragment {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     Lista_Comprar_Producto_Adaptador adapter;
-    FloatingActionButton fabAgregar;
     ProgressDialog iniciando;
     TextView txtNoHay;
     public Lista_General_Productos() {
@@ -80,6 +68,7 @@ public class Lista_General_Productos extends Fragment {
     }
 
     private void llenarLista() {
+
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
              /*   try {

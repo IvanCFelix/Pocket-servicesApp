@@ -1,10 +1,8 @@
 package com.c_felix.pocketmarket.Adaptadores;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +13,7 @@ import android.widget.TextView;
 
 import com.c_felix.pocketmarket.Clases.Carrito;
 import com.c_felix.pocketmarket.Clases.Productos;
-import com.c_felix.pocketmarket.Desplegar.Pedidos.Mapa_Ubicacion_Pedido;
 import com.c_felix.pocketmarket.R;
-import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
 import java.util.ArrayList;
 
@@ -51,7 +47,7 @@ public class Desplegar_Pedidos_Adaptador extends RecyclerView.Adapter<Desplegar_
         holder.rv_vizualisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, Mapa_Ubicacion_Pedido.class));
+
             }
         });
 

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         app:backgroundTint="@color/primary"
-        android:src="@drawable/ic_siguiente"
+        android:src="@drawable/ic_finalizar"
         android:layout_margin="16dp" />
 
     <android.support.design.widget.FloatingActionButton

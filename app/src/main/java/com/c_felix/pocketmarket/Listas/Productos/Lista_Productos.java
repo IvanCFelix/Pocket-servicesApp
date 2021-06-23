@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c_felix.pocketmarket.Adaptadores.Lista_Seleccionar_Producto_Adaptador;
-import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Producto;
+import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Jobs;
 import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
 import com.c_felix.pocketmarket.Clases.Usuarios;
@@ -58,7 +58,7 @@ public class Lista_Productos extends Fragment {
         fabAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Formulario_Producto.class));
+                startActivity(new Intent(getContext(), Formulario_Jobs.class));
             }
         });
         return view;

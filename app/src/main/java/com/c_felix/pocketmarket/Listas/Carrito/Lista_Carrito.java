@@ -15,22 +15,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.c_felix.pocketmarket.Adaptadores.Desplegar_Pedidos_Adaptador;
-import com.c_felix.pocketmarket.Adaptadores.Lista_Carrito_Producto_Adapter;
+import com.c_felix.pocketmarket.Adaptadores.Adapter_listing_worker;
 import com.c_felix.pocketmarket.Clases.Carrito;
 import com.c_felix.pocketmarket.Clases.Pedidos;
 import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.Menu_Vendedor;
 import com.c_felix.pocketmarket.R;
-import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
-import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
 import java.util.ArrayList;
 
 public class Lista_Carrito extends Fragment {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
-    Lista_Carrito_Producto_Adapter adapter;
+    Adapter_listing_worker adapter;
     TextView txtNoHay,total,txt_cantidad,textoTotal;
     Button ordenar;
 

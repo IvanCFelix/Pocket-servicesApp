@@ -1,7 +1,5 @@
 package com.c_felix.pocketmarket.Desplegar.Pedidos;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,32 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.c_felix.pocketmarket.Adaptadores.Desplegar_Pedidos_Adaptador;
-import com.c_felix.pocketmarket.Adaptadores.Lista_Carrito_Producto_Adapter;
-import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Producto;
-import com.c_felix.pocketmarket.Clases.Carrito;
-import com.c_felix.pocketmarket.Clases.Pedidos;
-import com.c_felix.pocketmarket.Clases.Productos;
-import com.c_felix.pocketmarket.Menu_Vendedor;
+import com.c_felix.pocketmarket.Agregar.Producto.Formulario_Jobs;
 import com.c_felix.pocketmarket.R;
-import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
-import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
-import java.util.ArrayList;
-
-public class Lista_Pedidos extends Fragment {
+public class Lista_MyListings extends Fragment {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     Desplegar_Pedidos_Adaptador adapter;
     TextView txtNoHay;
     Button btnAddListing;
 
-    ArrayList<Carrito> carrito = new ArrayList<>();
-    ArrayList<Productos> productos = new ArrayList<>();
 
-    public Lista_Pedidos() {
+    public Lista_MyListings() {
     }
 
 
@@ -58,7 +44,7 @@ public class Lista_Pedidos extends Fragment {
         btnAddListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Formulario_Producto.class));
+                startActivity(new Intent(getContext(), Formulario_Jobs.class));
             }
         });
 
@@ -107,6 +93,8 @@ public class Lista_Pedidos extends Fragment {
             }
         });
     }
+
+
 
 
 }

@@ -50,6 +50,8 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(Login.this, Menu_Vendedor.class));
             finish();
         }
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

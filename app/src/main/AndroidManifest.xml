@@ -23,9 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".Desplegar.Pedidos.Mapa_Ubicacion_Pedido" />
         <activity android:name=".Desplegar.Activity_Desplegar_Producto" />
-        <activity android:name=".Agregar.Producto.Formulario_Producto" />
+        <activity android:name=".Agregar.Producto.Formulario_Jobs" />
         <activity
             android:name=".Menu_Vendedor"
             android:theme="@style/AppTheme.NoActionBar" />
