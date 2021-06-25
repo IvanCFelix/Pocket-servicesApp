@@ -1,4 +1,4 @@
-package com.c_felix.pocketmarket.Agregar.Producto;
+package com.c_felix.pocketmarket.Agregar.Listing;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,12 +29,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
-import com.c_felix.pocketmarket.Login;
-import com.c_felix.pocketmarket.Menu_Vendedor;
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
@@ -52,16 +48,15 @@ public class Formulario_Jobs extends AppCompatActivity {
     Spinner categoria;
     TextView txtNoHay;
     Button agregar;
-    ViewPager viewPager;
-    TabLayout tabLayout;
+    ViewPager paginas;
     Bitmap bmpImagen;
-    ImageView ivImagen, registrarImagen;
+    ImageView ivImagen;
     ArrayList<UsuarioActivo> usuarioActivos = new ArrayList<>();
     private RequestQueue queue ;
-    ArrayList<String> jobList = new ArrayList<>();
-    ArrayList<JSONObject> jobsObjects = new ArrayList<>();
+    JSONArray jobListing = new JSONArray();
 
-    int jobId;
+    ArrayList<String> data = new ArrayList<>();
+    Integer jobId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,27 +67,29 @@ public class Formulario_Jobs extends AppCompatActivity {
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        viewPager = findViewById(R.id.vpMedia);
-        tabLayout = findViewById(R.id.tabDots);
+
         txtNoHay = findViewById(R.id.txtNoHay);
         agregar = findViewById(R.id.btn_agg_listing);
-        ivImagen = findViewById(R.id.iv_imagen);
-        registrarImagen = findViewById(R.id.iv_RegistrarFoto);
+        ivImagen = findViewById(R.id.iv_Imagen);
         queue = Volley.newRequestQueue(Formulario_Jobs.this);
-        categoria = findViewById(R.id.spn_job_category);
+        categoria = findViewById(R.id.spn_category);
         name = findViewById(R.id.txt_name);
         description = findViewById(R.id.txt_description);
         usuarioActivos = SQLITE.obtenerUsuarioActivo(Formulario_Jobs.this);
         getJobs();
-
-
-
-        categoria.setAdapter(new ArrayAdapter<>(Formulario_Jobs.this, R.layout.support_simple_spinner_dropdown_item, jobList));
+        data.add("Seleccione la categoria");
+        categoria.setAdapter(new ArrayAdapter<String>(Formulario_Jobs.this, android.R.layout.simple_spinner_dropdown_item,data));
 
         categoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println("Posicion:"+i );
+                try {
+                    jobId= jobListing.getJSONObject(i-1).getInt("id");
 
+                }catch (JSONException e) {
+
+                }
             }
 
             @Override
@@ -102,7 +99,8 @@ public class Formulario_Jobs extends AppCompatActivity {
         });
 
 
-        registrarImagen.setOnClickListener(new View.OnClickListener() {
+
+        ivImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Formulario_Jobs.this);
@@ -134,7 +132,7 @@ public class Formulario_Jobs extends AppCompatActivity {
                        JSONObject user = new JSONObject(usuario.get(0).getUser());
                         listing.put("name",name.getText().toString());
                         listing.put("description",description.getText().toString());
-                        listing.put("jobId",1);
+                        listing.put("jobId",jobId);
                         listing.put("userId",user.get("id"));
                         listing.put("image",Metodos_Estaticos.convertToBase64(bmpImagen));
                         registerListing(listing);
@@ -197,22 +195,21 @@ public class Formulario_Jobs extends AppCompatActivity {
                     (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            for (int i=0; i < response.length(); i++) {
-                              try{
-                                  JSONObject job = response.getJSONObject(i);
-                                  jobList.add(job.getString("name"));
-                                  jobsObjects.add(job);
-                              }catch (JSONException e){
+                                  jobListing = response;
+                            for (int i = 0; i < jobListing.length() ; i++) {
 
-                              }
+                                try{
+                                    JSONObject listing = jobListing.getJSONObject(i);
+                                    data.add(listing.getString("name"));
+                                    System.out.println("lsting: "+listing.toString());
+                                }catch (JSONException e){
+                                    Log.e("TAG", "onCreate: ",e );
+                                }
                             }
                         }
                     }, new Response.ErrorListener() {
-
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // TODO: Handle error
-
                         }
                     });
 
@@ -229,8 +226,8 @@ public class Formulario_Jobs extends AppCompatActivity {
             bitmap = Metodos_Estaticos.comprimirImagen(bitmap, 480);
             bmpImagen = bitmap;
             ivImagen.setVisibility(View.VISIBLE);
-            registrarImagen.setVisibility(View.GONE);
             ivImagen.setImageBitmap(bmpImagen);
+            ivImagen.setImageTintMode(null);
         } catch (IOException e) {
             e.printStackTrace();
         }

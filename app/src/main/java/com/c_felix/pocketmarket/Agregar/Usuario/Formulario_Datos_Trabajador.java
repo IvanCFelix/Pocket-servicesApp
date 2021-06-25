@@ -23,10 +23,8 @@ import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Formulario_Datos_Usuario extends Fragment {
+public class Formulario_Datos_Trabajador extends Fragment {
     ImageView ivImagen;
     FloatingActionButton fabAgregarImagen;
     EditText txtNombre, txt_adress, txtCorreo,txt_password,txt_age;
@@ -34,7 +32,7 @@ public class Formulario_Datos_Usuario extends Fragment {
     Spinner spn_genere;
 
     int genero;
-    public Formulario_Datos_Usuario() {
+    public Formulario_Datos_Trabajador() {
         // Required empty public constructor
     }
     String[] geners = {"Seleccione su genero","Femenino","Masculino",".Otro"};

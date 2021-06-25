@@ -23,10 +23,15 @@ import android.widget.TextView;
 
 import com.c_felix.pocketmarket.Adaptadores.Mi_Usuario;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
-import com.c_felix.pocketmarket.Desplegar.Pedidos.Lista_MyListings;
-import com.c_felix.pocketmarket.Listas.Lista_General_Productos;
-import com.c_felix.pocketmarket.Listas.Productos.Lista_Productos;
+import com.c_felix.pocketmarket.Desplegar.Listings.Lista_MyListings;
+import com.c_felix.pocketmarket.Desplegar.Listings.Show_Perfil;
+import com.c_felix.pocketmarket.Listas.Listings.Job_Listing;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
+import com.c_felix.pocketmarket.Utilidades.Uris;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -34,12 +39,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Menu_Vendedor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Mi_Usuario mi_usuario = new Mi_Usuario();
-    Lista_Productos lista_productos = new Lista_Productos();
-    Lista_General_Productos lista_general_productos = new Lista_General_Productos();
+    Show_Perfil showPerfil = new Show_Perfil();
+    Job_Listing lisints = new Job_Listing();
     Lista_MyListings lista_myListings = new Lista_MyListings();
     public static CircleImageView imagenPerfil;
     public static TextView txtNombre, txtCorreo;
-    ArrayList<UsuarioActivo> usuarioActivos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,32 +59,33 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //Checar ensimas de esta
+
         navigationView.getMenu().getItem(0).setChecked(true);
         View headerView = navigationView.getHeaderView(0);
         Drawable icono = getResources().getDrawable(R.drawable.ic_casa);
         icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setIcon(icono);
 
-        headerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cambiarFragmento(mi_usuario);
-                navigationView.getMenu().getItem(5).setChecked(true);
-            }
-        });
+
         imagenPerfil = headerView.findViewById(R.id.navheader_civ);
         txtNombre = headerView.findViewById(R.id.navheader_Nombre);
         txtCorreo = headerView.findViewById(R.id.navheader_Correo);
 
-        usuarioActivos = SQLITE.obtenerUsuarioActivo(Menu_Vendedor.this);
-        imagenPerfil.setImageBitmap(null);
-        txtNombre.setText("Panchito");
-        txtCorreo.setText("demo-bloque@hotmai.com");
+        ArrayList<UsuarioActivo> usuario = SQLITE.obtenerUsuarioActivo(Menu_Vendedor.this);
+        try{
+            JSONObject user = new JSONObject(usuario.get(0).getUser());
+            System.out.println(user.toString());
+            Picasso.get().load(Uris.IMAGES_ENDPOINT+user.getString("image")).into(imagenPerfil);
+            txtNombre.setText(user.getString("fullName"));
+            txtCorreo.setText(user.getString("email"));
+        }catch (JSONException e){
+            System.out.println(e.toString());
+        }
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.area_ventana, lista_general_productos);
+        fragmentTransaction.replace(R.id.area_ventana, lisints);
         fragmentTransaction.commit();
 
     }
@@ -94,7 +99,7 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
         switch (id) {
             case R.id.nav_Intro:
                 try {
-                    fragmentTransaction.replace(R.id.area_ventana,lista_general_productos);
+                    fragmentTransaction.replace(R.id.area_ventana,lisints);
                     drawer.closeDrawer(GravityCompat.START);
                     Drawable icono = getResources().getDrawable(R.drawable.ic_casa);
                     icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
@@ -109,16 +114,16 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
                     drawer.closeDrawer(GravityCompat.START);
                     Drawable icono = getResources().getDrawable(R.drawable.ic_tareas);
                     icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-                    getSupportActionBar().setIcon(icono);                } catch (Exception e) {
+                    getSupportActionBar().setIcon(icono);
+                } catch (Exception e) {
                 }
                 break;
                 case R.id.nav_Mi_Usuario:
                 try {
-                  fragmentTransaction.replace(R.id.area_ventana, mi_usuario);
+                  fragmentTransaction.replace(R.id.area_ventana, showPerfil);
                     drawer.closeDrawer(GravityCompat.START);
                     Drawable icono = getResources().getDrawable(R.drawable.ic_persona);
-                    icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-                    getSupportActionBar().setIcon(icono);
+                     getSupportActionBar().setIcon(icono);
                 } catch (Exception e) {
                 }
                 break;

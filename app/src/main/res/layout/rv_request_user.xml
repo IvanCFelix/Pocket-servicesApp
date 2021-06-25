@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#B338FF">
+
+        <LinearLayout
+            android:id="@+id/rv_encabezado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:id="@+id/rv_lyTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="80dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+
+                android:paddingRight="5dp">
+
+                <ImageView
+                    android:paddingLeft="5dp"
+                    android:id="@+id/rv_ivFoto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+
+
+                    android:src="@drawable/abrir_galeria"/>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   android:layout_gravity="center">
+                   <TextView
+                       android:id="@+id/rv_txtNombre"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:paddingHorizontal="14dp"
+                       android:text="Juan Carlos Bodoque"
+                       android:layout_marginTop="20dp"
+                       android:textColor="#FFFFFF"
+                       android:textStyle="bold"
+                       android:textSize="15sp"
+                       tools:ignore="MissingConstraints" />
+                   <TextView
+                       android:id="@+id/txt_job"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:paddingHorizontal="14dp"
+                       android:text="Arquitecto"
+                       android:layout_marginTop="10dp"
+                       android:textColor="#D6D5D5"
+                       android:textStyle="bold"
+                       android:textSize="15sp"
+                       tools:ignore="MissingConstraints" />
+               </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/rvEditar"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:foreground="?attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="-90dp"
+
+                android:padding="8dp"
+                android:tint="#FFFFFF"
+                app:srcCompat="@drawable/ic_ojo" />
+
+            <ImageView
+                android:id="@+id/rvEliminar"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="8dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitCenter"
+                android:tint="#FFFFFF"
+                app:srcCompat="@drawable/ic_eliminar" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

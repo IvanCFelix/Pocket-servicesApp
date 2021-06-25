@@ -1,13 +1,10 @@
 package com.c_felix.pocketmarket.Agregar.Usuario;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,18 +16,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.c_felix.pocketmarket.Adaptadores.SlideViewPager;
-import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.R;
 import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
-import com.c_felix.pocketmarket.Utilidades.SQLITE;
 import com.c_felix.pocketmarket.Utilidades.Uris;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

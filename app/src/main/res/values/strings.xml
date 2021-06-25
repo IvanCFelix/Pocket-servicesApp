@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AgroNodo</string>
+    <string name="app_name">PocketServices</string>
     <string name="title_activity_menu__agronomo">Menu Agronomo</string>
     <string name="navigation_drawer_open">Abrir Navegador</string>
     <string name="navigation_drawer_close">Cerrar Navegador</string>

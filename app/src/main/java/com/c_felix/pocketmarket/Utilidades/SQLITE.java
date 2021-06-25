@@ -2,17 +2,12 @@ package com.c_felix.pocketmarket.Utilidades;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.c_felix.pocketmarket.Clases.Carrito;
-import com.c_felix.pocketmarket.Clases.Pedidos;
-import com.c_felix.pocketmarket.Clases.Productos;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
-import com.c_felix.pocketmarket.Clases.Usuarios;
 
 import java.util.ArrayList;
 

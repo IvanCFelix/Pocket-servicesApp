@@ -1,7 +1,6 @@
 package com.c_felix.pocketmarket.Adaptadores;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
-import com.c_felix.pocketmarket.Clases.Usuarios;
 import com.c_felix.pocketmarket.R;
-import com.c_felix.pocketmarket.Utilidades.Metodos_Estaticos;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ public class Mi_Usuario extends Fragment {
     String Usuario;
     ArrayList<UsuarioActivo> usuarioActivo = new ArrayList<>();
     TextView txtNombre, txtCorreo;
-    Usuarios usuario;
+
     public Mi_Usuario() {
         // Required empty public constructor
     }
@@ -52,7 +49,6 @@ public class Mi_Usuario extends Fragment {
         getActivity().setTitle(" " + getString(R.string.mi_usuario));
 
 
-        Bitmap imagen = SQLITE.obtenerImagen(getContext(),usuario.getID());
         txtNombre.setText("Ejemplo");
         txtCorreo.setText("Data");
         civPerfil.setImageBitmap(null);
