@@ -35,7 +35,6 @@ public class Formulario_Datos_Usuario extends Fragment {
 
     int genero;
     public Formulario_Datos_Usuario() {
-        // Required empty public constructor
     }
     String[] geners = {"Seleccione su genero","Femenino","Masculino",".Otro"};
 

@@ -33,7 +33,7 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
     SlideViewPager adaptador;
     FloatingActionButton fabSiguiente, fabAtras;
     Formulario_Datos_Usuario formulario_datos_usuario = new Formulario_Datos_Usuario();
-
+    Formulario_Tipo_Cuenta formulario_tipo_cuenta = new Formulario_Tipo_Cuenta();
     List<Fragment> lista = new ArrayList<>();
     private RequestQueue queue;
 
@@ -49,6 +49,8 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
         fabAtras = findViewById(R.id.fab_atras);
         queue = Volley.newRequestQueue(this);
 
+
+        lista.add(formulario_tipo_cuenta);
         lista.add(formulario_datos_usuario);
 
         paginas = findViewById(R.id.vpIntro);
@@ -73,30 +75,44 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
         fabSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (paginas.getCurrentItem() == 0 ) {
+                        paginas.setCurrentItem(1);
+                }else{
+                    if (paginas.getCurrentItem() == 1) {
+                        if (formulario_datos_usuario.txt_adress.getText() == null || formulario_datos_usuario.txtCorreo.getText() == null || formulario_datos_usuario.txtNombre.getText() == null
+                                || formulario_datos_usuario.bmpImagen == null || formulario_datos_usuario.genero == 0) {
+                            Toast.makeText(Activity_Registrar_Usuario.this, "Revise que todos los datos esten llenos", Toast.LENGTH_SHORT).show();
+                        } else {
+                            try {
+                                JSONObject user = new JSONObject();
+                                user.put("fullName", formulario_datos_usuario.txtNombre.getText().toString());
+                                user.put("email", formulario_datos_usuario.txtCorreo.getText().toString());
+                                user.put("password", formulario_datos_usuario.txt_password.getText().toString());
+                                user.put("address", formulario_datos_usuario.txt_adress.getText().toString());
+                                user.put("age", Integer.parseInt(formulario_datos_usuario.txt_age.getText().toString()));
+                                user.put("gender", formulario_datos_usuario.genero - 1);
+                                if(formulario_tipo_cuenta.tipoCuenta == 1){
+                                    user.put("roleId", 2);
+                                    JSONObject job = formulario_tipo_cuenta.jobListing.getJSONObject(formulario_tipo_cuenta.jobId);
+                                    user.put("jobId",job.get("id"));
+                                    user.put("description", formulario_tipo_cuenta.txt_description.getText());
+                                    user.put("phone", formulario_tipo_cuenta.txt_phone.getText());
+                                }else{
+                                    user.put("roleId", 3);
+                                }
+                                user.put("image", Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen));
+                                if(formulario_tipo_cuenta.tipoCuenta == 1){
+                                    addWorker(user);
+                                }else{
+                                    addUser(user);
+                                }
+                            } catch (Exception e) {
+                                Log.e("TAG", "onClick: ", e);
+                            }
 
-                if (formulario_datos_usuario.txt_adress.getText() == null || formulario_datos_usuario.txtCorreo.getText() == null || formulario_datos_usuario.txtNombre.getText() == null
-                        || formulario_datos_usuario.bmpImagen == null || formulario_datos_usuario.genero == 0) {
-                    Toast.makeText(Activity_Registrar_Usuario.this, "Revise que todos los datos esten llenos", Toast.LENGTH_SHORT).show();
-                } else {
-                    try {
-                        JSONObject user = new JSONObject();
-                        String imagen = "data:image/jpeg;base64,"+ Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen);
-                        user.put("fullName", formulario_datos_usuario.txtNombre.getText().toString());
-                        user.put("email", formulario_datos_usuario.txtCorreo.getText().toString());
-                        user.put("password", formulario_datos_usuario.txt_password.getText().toString());
-                        user.put("address", formulario_datos_usuario.txt_adress.getText().toString());
-                        user.put("age", Integer.parseInt(formulario_datos_usuario.txt_age.getText().toString()));
-                        user.put("gender", formulario_datos_usuario.genero - 1);
-                        user.put("image", Metodos_Estaticos.convertToBase64(formulario_datos_usuario.bmpImagen));
-                        user.put("roleId",3);
-                        System.out.println(user.get("image"));
 
-                        addUser(user);
-                    } catch (Exception e) {
-                        Log.e("TAG", "onClick: ", e);
+                        }
                     }
-
-
                 }
             }
         });
@@ -126,6 +142,28 @@ public class Activity_Registrar_Usuario extends AppCompatActivity {
 
     private void addUser(JSONObject user) {
         String url = Uris.API_ENDPOINT+"/user";
+        JsonObjectRequest request = new JsonObjectRequest
+                (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        System.out.println(response);
+                        Toast.makeText(Activity_Registrar_Usuario.this,
+                                "Se registro correctamente", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.toString());
+                    }
+                });
+        queue.add(request);
+
+    }
+
+    private void addWorker(JSONObject user) {
+        String url = Uris.API_ENDPOINT+"/worker";
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
                     @Override

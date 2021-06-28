@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="30dp"
-            android:text="Carrito vacio"
+            android:text="No hay trabajos nuevos"
             android:textColor="#57000000"
             android:textSize="30sp"
             android:textStyle="bold|italic"

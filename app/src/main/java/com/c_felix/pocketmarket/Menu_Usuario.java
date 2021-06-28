@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.c_felix.pocketmarket.Clases.UsuarioActivo;
 import com.c_felix.pocketmarket.Desplegar.Listings.Lista_MyListings;
 import com.c_felix.pocketmarket.Desplegar.Listings.Profile.Show_Perfil_user;
-import com.c_felix.pocketmarket.Listas.Listings.Job_Listing;
 import com.c_felix.pocketmarket.Utilidades.SQLITE;
 import com.c_felix.pocketmarket.Utilidades.Uris;
 import com.squareup.picasso.Picasso;
@@ -36,16 +35,15 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Menu_Vendedor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Menu_Usuario extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Show_Perfil_user showPerfil = new Show_Perfil_user();
-    Job_Listing lisints = new Job_Listing();
     Lista_MyListings lista_myListings = new Lista_MyListings();
     public static CircleImageView imagenPerfil;
     public static TextView txtNombre, txtCorreo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__inicio_trabajador);
+        setContentView(R.layout.activity__inicio);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -69,13 +67,12 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
         txtNombre = headerView.findViewById(R.id.navheader_Nombre);
         txtCorreo = headerView.findViewById(R.id.navheader_Correo);
 
-        ArrayList<UsuarioActivo> usuario = SQLITE.obtenerUsuarioActivo(Menu_Vendedor.this);
+        ArrayList<UsuarioActivo> usuario = SQLITE.obtenerUsuarioActivo(Menu_Usuario.this);
         try{
             JSONObject user = new JSONObject(usuario.get(0).getUser());
             System.out.println(user.toString());
             Picasso.get().load(Uris.IMAGES_ENDPOINT+user.getString("image")).into(imagenPerfil);
             txtNombre.setText(user.getString("fullName"));
-            System.out.println(Uris.IMAGES_ENDPOINT+user.getString("image"));
             txtCorreo.setText(user.getString("email"));
         }catch (JSONException e){
             System.out.println(e.toString());
@@ -84,7 +81,8 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.area_ventana, lisints);
+        fragmentTransaction.replace(R.id.area_ventana, lista_myListings);
+
         fragmentTransaction.commit();
 
     }
@@ -96,17 +94,6 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         switch (id) {
-            case R.id.nav_Intro:
-                try {
-                    fragmentTransaction.replace(R.id.area_ventana,lisints);
-                    drawer.closeDrawer(GravityCompat.START);
-                    Drawable icono = getResources().getDrawable(R.drawable.ic_casa);
-                    icono.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-                    getSupportActionBar().setIcon(icono);
-                } catch (Exception e) {
-                }
-
-                break;
             case R.id.nav_pedidos:
                 try {
                     fragmentTransaction.replace(R.id.area_ventana, lista_myListings);
@@ -128,12 +115,12 @@ public class Menu_Vendedor extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.nav_salir:
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Menu_Vendedor.this);
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Menu_Usuario.this);
                 dialogo1.setTitle(getString(R.string.desea_cerrar_sesion));
                 dialogo1.setPositiveButton(getString(R.string.confirmar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        SQLITE.limpiarTabla(Menu_Vendedor.this,SQLITE.tablaUsuarioActivo);
-                        startActivity(new Intent(Menu_Vendedor.this, Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        SQLITE.limpiarTabla(Menu_Usuario.this,SQLITE.tablaUsuarioActivo);
+                        startActivity(new Intent(Menu_Usuario.this, Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }
                 });

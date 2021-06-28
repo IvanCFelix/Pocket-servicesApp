@@ -13,10 +13,23 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Base64;
+import android.util.Log;
+import android.view.View;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.c_felix.pocketmarket.Adaptadores.Adapter_listing_user;
 import com.c_felix.pocketmarket.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -85,6 +98,10 @@ public class Metodos_Estaticos {
         File file = new File(ruta);
         file.delete();
     }
+
+
+
+
     public static void abrirGaleria(Activity activity, int codigo) {
         Intent intent = new Intent();
         intent.setType("image/*");

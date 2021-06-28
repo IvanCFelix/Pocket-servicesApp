@@ -79,6 +79,7 @@
                         android:textSize="15sp"
                         tools:ignore="MissingConstraints" />
                     <Button
+                        android:id="@+id/btn_aplicar"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="right"

@@ -28,27 +28,45 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
-    Button registrarse,login;
+    Button registrarse, login;
     EditText username, password;
     public static final int MULTIPLE_PERMISSIONS_REQUEST_CODE = 3;
     public static final String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-    ArrayList<UsuarioActivo> activo;
+
 
     private RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         registrarse = findViewById(R.id.btnRegistrarse);
         login = findViewById(R.id.btnIniciarSesion);
-        username =findViewById(R.id.txt_Login_Usuario);
-        password=findViewById(R.id.txt_Login_Contraseña);
+        username = findViewById(R.id.txt_Login_Usuario);
+        password = findViewById(R.id.txt_Login_Contraseña);
         queue = Volley.newRequestQueue(this);
         PedirPermisos();
-        activo = SQLITE.obtenerUsuarioActivo(Login.this);
-        if(activo.size()!=0){
-            startActivity(new Intent(Login.this, Menu_Vendedor.class));
-            finish();
+        try {
+            if (SQLITE.obtenerUsuarioActivo(Login.this).size() != 0) {
+
+
+                JSONObject usuario = new JSONObject(SQLITE.obtenerUsuarioActivo(Login.this).get(0).getUser());
+                switch (usuario.getInt("role")) {
+                    case 2:
+                        startActivity(new Intent(Login.this, Menu_Vendedor.class));
+                        finish();
+                        break;
+                    case 3:
+                        startActivity(new Intent(Login.this, Menu_Usuario.class));
+                        finish();
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
 
@@ -58,30 +76,30 @@ public class Login extends AppCompatActivity {
                 JSONObject credentials = new JSONObject();
                 try {
                     credentials.put("email", username.getText().toString());
-                    credentials.put("password",password.getText().toString());
-                    System.out.println("jsonString: "+credentials.toString());
-                    String url = Uris.API_ENDPOINT+"/login";
+                    credentials.put("password", password.getText().toString());
+                    System.out.println("jsonString: " + credentials.toString());
+                    String url = Uris.API_ENDPOINT + "/login";
                     JsonObjectRequest request = new JsonObjectRequest
                             (Request.Method.POST, url, credentials, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    try{
-                                        if(response.getJSONObject("user").get("id") != null){
-                                            try{
-                                                UsuarioActivo user = new UsuarioActivo(response.getJSONObject("user").toString(),response.getString("token"));
-                                                System.out.println(user.toString());
-                                                SQLITE.agregarUsuarioActivo(Login.this,user);
-                                                activo = SQLITE.obtenerUsuarioActivo(Login.this);
+                                    System.out.println(response.toString());
 
-                                            }catch (Error error){
-                                                System.out.println("Error"+error);
+                                    try {
+                                        if (response.getJSONObject("response") != null) {
+                                            UsuarioActivo user = new UsuarioActivo(response.getJSONObject("response").toString(), response.getString("token"));
+                                            SQLITE.agregarUsuarioActivo(Login.this, user);
+                                            if (response.getJSONObject("response").getInt("role") == 2) {
+                                                startActivity(new Intent(Login.this, Menu_Vendedor.class));
+                                                finish();
+                                            }else{
+                                                startActivity(new Intent(Login.this, Menu_Usuario.class));
+                                                finish();
                                             }
 
-                                            startActivity(new Intent(Login.this, Menu_Vendedor.class));
-
                                         }
-                                    }catch (JSONException error){
-                                        Log.println(1, "Json error ",error.toString());
+                                    } catch (Exception error) {
+                                        System.out.println(error.toString());
                                     }
                                 }
                             }, new Response.ErrorListener() {
@@ -92,8 +110,8 @@ public class Login extends AppCompatActivity {
                             });
                     queue.add(request);
 
-                }catch (JSONException e){
-                    Log.e("TAG", "onClick: ",  e);
+                } catch (JSONException e) {
+                    Log.e("TAG", "onClick: ", e);
                 }
 
             }

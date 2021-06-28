@@ -81,22 +81,13 @@
                 android:layout_height="match_parent"
                 android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitCenter"
-                android:layout_marginLeft="-90dp"
+                android:layout_marginLeft="-60dp"
 
                 android:padding="8dp"
                 android:tint="#FFFFFF"
                 app:srcCompat="@drawable/ic_ojo" />
 
-            <ImageView
-                android:id="@+id/rvEliminar"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:foreground="?attr/selectableItemBackground"
-                android:padding="8dp"
-                android:layout_marginLeft="10dp"
-                android:scaleType="fitCenter"
-                android:tint="#FFFFFF"
-                app:srcCompat="@drawable/ic_eliminar" />
+
 
         </LinearLayout>
 

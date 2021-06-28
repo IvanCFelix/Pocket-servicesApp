@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -22,10 +23,15 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Desplegar.Listings.show_requests"></activity>
+        <activity android:name=".Desplegar.Listings.Profile.Show_profile_worker"></activity>
+        <activity android:name=".Desplegar.Listings.Show_list_request" />
         <activity android:name=".Agregar.Listing.Formulario_Jobs" />
+        />
         <activity
             android:name=".Menu_Vendedor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Menu_Usuario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"

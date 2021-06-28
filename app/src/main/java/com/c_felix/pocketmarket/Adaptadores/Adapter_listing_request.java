@@ -34,7 +34,7 @@ public class Adapter_listing_request extends RecyclerView.Adapter<Adapter_listin
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_item_user, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_request_user, parent, false);
         return new ViewHolder(view);
     }
 

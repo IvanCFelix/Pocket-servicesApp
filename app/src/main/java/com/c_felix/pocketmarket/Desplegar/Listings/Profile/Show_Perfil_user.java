@@ -1,4 +1,4 @@
-package com.c_felix.pocketmarket.Desplegar.Listings;
+package com.c_felix.pocketmarket.Desplegar.Listings.Profile;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,13 +28,13 @@ import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Show_Perfil extends Fragment {
+public class Show_Perfil_user extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     Adapter_listing_worker adapter;
     TextView txtNoHay, txtName , txtEmail;
     CircleImageView profileImage;
     private RequestQueue queue;
-    public Show_Perfil() {
+    public Show_Perfil_user() {
     }
 
 
@@ -49,16 +49,16 @@ public class Show_Perfil extends Fragment {
         queue = Volley.newRequestQueue(getContext());
         txtName = view.findViewById(R.id.txt_name);
         txtEmail = view.findViewById(R.id.navheader_correo);
-        profileImage = view.findViewById(R.id.navheader_civ);
+        profileImage = view.findViewById(R.id.img_profile);
 
 
 
         getActivity().setTitle(" Mi perfil");
         try{
             JSONObject user = new JSONObject(SQLITE.obtenerUsuarioActivo(getContext()).get(0).getUser());
+            Picasso.get().load(Uris.IMAGES_ENDPOINT+user.getString("image")).into(profileImage);
             txtName.setText(user.getString("fullName"));
             txtEmail.setText(user.getString("email"));
-            Picasso.get().load(Uris.IMAGES_ENDPOINT+user.getString("image")).into(profileImage);
         }catch (Exception e){
             Log.e("Error seteando", "onCreateView: ",e );
         }

@@ -89,17 +89,17 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:elevation="0dp"
                     android:id="@+id/btn_delete"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:padding="10dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:drawableTint="@color/colorRed"
-                    android:textColor="@color/colorWhite"
+                    android:layout_margin="5dp"
                     android:background="@drawable/ic_eliminar"
                     android:backgroundTint="@color/colorRed"
+                    android:drawableTint="@color/colorRed"
+                    android:elevation="0dp"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
                     android:textSize="10dp" />
 
                 <Button
@@ -136,7 +136,7 @@
             android:layout_gravity="left"
             android:paddingHorizontal="14dp"
             android:paddingBottom="10dp"
-            android:text="asdasdasdasdsadadasdasdsada"
+            android:text=""
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
 

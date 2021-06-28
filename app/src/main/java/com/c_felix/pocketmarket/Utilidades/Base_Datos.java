@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 
 public class Base_Datos extends SQLiteOpenHelper {
-    public static final String nombreBaseDatos = "PocketMarket";
+    public static final String nombreBaseDatos = "PocketServices";
     public static final int Version = 15;
     Context context;
 
